@@ -35,7 +35,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         txtTitle.setText(itemname[position]);
-        imageView.setImageResource(imgid[position]);
+        imageView.setImageBitmap(ImageNicer.decodeSampledBitmapFromResource(context.getResources(), imgid[position], 100, 100));
         extratxt.setText("Pilih untuk info tentang " + itemname[position]);
         return rowView;
 
