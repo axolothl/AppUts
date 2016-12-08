@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity{
     ArrayList<HashMap<String, String>> DaftarKota = new ArrayList<>();
     private ProgressDialog progressDialog;
     JSONArray jsonArray = null;
-//    ListView ls;
     ListAdapter listAdapter;
     static final int tampil_error=1;
     public String lo_Koneksi,isi ;
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity{
 
     private class Koneksi {
         public String isi_koneksi() {
-            String isi = "http://192.168.0.105/kotamu";
+            String isi = "http://mobcompfinal.pe.hu/";
             return isi;
         }
     }

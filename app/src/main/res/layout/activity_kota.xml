@@ -21,7 +21,6 @@
             android:weightSum="1">
 
             <TextView
-                android:text="Aceh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -31,9 +30,8 @@
                 android:id="@+id/namakota" />
 
             <ImageView
-                android:id="@+id/icon"
+                android:id="@+id/imageKota"
                 android:layout_width="match_parent"
-                app:srcCompat="@mipmap/masjidraya"
                 android:padding="5dp"
                 android:layout_height="250dp" />
 
@@ -47,7 +45,6 @@
                 android:id="@+id/deskripsi" />
 
             <TextView
-                android:text="Aceh adalah sebuah provinsi di Indonesia. Aceh terletak di ujung utara pulau Sumatera dan merupakan provinsi paling barat di Indonesia. Ibu kotanya adalah Banda Aceh. Jumlah penduduk provinsi ini sekitar 4.500.000 jiwa. Letaknya dekat dengan Kepulauan Andaman dan Nikobar di India dan terpisahkan oleh Laut Andaman. Aceh berbatasan dengan Teluk Benggala di sebelah utara, Samudra Hindia di sebelah barat, Selat Malaka di sebelah timur, dan Sumatera Utara di sebelah tenggara dan selatan."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
