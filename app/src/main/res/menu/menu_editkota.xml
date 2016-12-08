@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Edit Deskripsi"
+        android:id="@+id/edit_deskripsi"
+        app:showAsAction="never" />
+    <item android:title="Edit Tempat Wisata"
+        android:id="@+id/edit_wisata"
+        app:showAsAction="never" />
+    <item android:title="Edit Kuliner"
+        android:id="@+id/edit_kuliner"
+        app:showAsAction="never" />
+
+</menu>

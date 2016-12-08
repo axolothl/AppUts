@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppUts</string>
     <string name="google_app_id">firebase-apputs</string>
+    <string name="add">Add Data</string>
 </resources>
