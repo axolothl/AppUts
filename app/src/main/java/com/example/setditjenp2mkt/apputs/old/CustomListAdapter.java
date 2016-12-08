@@ -1,4 +1,4 @@
-package com.example.setditjenp2mkt.apputs;
+package com.example.setditjenp2mkt.apputs.old;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.setditjenp2mkt.apputs.utils.ImageNicer;
+import com.example.setditjenp2mkt.apputs.R;
 
 /**
  * Created by setditjen P2MKT on 27/10/2016.

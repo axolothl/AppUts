@@ -30,5 +30,15 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/kode"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView1"
+            android:layout_toEndOf="@+id/textView1" />
     </LinearLayout>
 </LinearLayout>

@@ -1,13 +1,28 @@
 package com.example.setditjenp2mkt.apputs;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
+import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class KotaActivity extends AppCompatActivity {
     ListView wisata, makanan;
@@ -75,4 +90,6 @@ public class KotaActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

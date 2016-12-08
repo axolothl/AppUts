@@ -1,4 +1,4 @@
-package com.example.setditjenp2mkt.apputs;
+package com.example.setditjenp2mkt.apputs.utils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
