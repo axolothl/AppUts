@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_wisata"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.setditjenp2mkt.apputs.WisataActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:text="Museum Tsunami"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:id="@+id/namawisata"
+                android:fontFamily="casual" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                app:srcCompat="@mipmap/museumtsunami"
+                android:padding="5dp"
+                android:layout_height="250dp" />
+
+            <TextView
+                android:text="Museum Tsunami Aceh dirancang oleh arsitek asal Indonesia, Ridwan Kamil. Museum ini merupakan sebuah struktur empat lantai dengan luas 2.500 m² yang dinding lengkungnya ditutupi relief geometris. Di dalamnya, pengunjung masuk melalui lorong sempit dan gelap di antara dua dinding air yang tinggi — untuk menciptakan kembali suasana dan kepanikan saat tsunami. Dinding museum dihiasi gambar orang-orang menari Saman, sebuah makna simbolis terhadap kekuatan, disiplin, dan kepercayaan religius suku Aceh. Dari atas, atapnya membentuk gelombang laut. Lantai dasarnya dirancang mirip rumah panggung tradisional Aceh yang selamat dari terjangan tsunami"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"
+                android:id="@+id/kontendeskripsi"
+                android:paddingBottom="16dp"
+                android:fontFamily="casual"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="Lokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/textView2"
+                android:fontFamily="casual" />
+
+            <fragment
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
