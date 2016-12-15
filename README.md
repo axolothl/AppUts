@@ -1,5 +1,5 @@
 # Mobile Computing Final Project
-## Week 2 Progress Report ##
+## Week 2 Progress Report
 What's new in this week' progress
 - Created Register and Login Activity using Android Volley Library to send POST request to server
 - CodeIgniter implemented as PHP Framework for this web-based service application (link: bitbucket.org/gregoriusandito/pantura) 
