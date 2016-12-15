@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -160,9 +161,19 @@ public class KotaActivity extends AppCompatActivity {
         tvdesc.setText(deskripsi1.get(city_position));
         headerkota.setImageResource(imgheaderkota1.get(city_position));
 
+        for (int i = 0; i < namawisata1.size(); i++){
+            WisataActivity.all_account_wisata.get(city_position).add(new ArrayList<String>());
+            WisataActivity.all_profpict_wisata.get(city_position).add(new ArrayList<Integer>());
+            WisataActivity.all_comment_wisata.get(city_position).add(new ArrayList<String>());
+        }
+
         CustomListAdapter adapter = new CustomListAdapter(this, namawisata1.get(city_position), imgwisata1.get(city_position));
         wisata = (ListView)findViewById(R.id.wisata_aceh);
         wisata.setAdapter(adapter);
+
+        for (int i = 0; i < KotaActivity.namawisata1.size(); i++) {
+            Log.d("namawisata1:", KotaActivity.namawisata1.get(i).toString());
+        }
 
         wisata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -176,6 +187,8 @@ public class KotaActivity extends AppCompatActivity {
                     intent.putExtra("city_position", city_position);
                     Toast.makeText(getApplicationContext(), selecteditem, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "kosong", Toast.LENGTH_SHORT).show();
                 }
             }
         });

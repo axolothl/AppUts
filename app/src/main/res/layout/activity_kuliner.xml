@@ -60,6 +60,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"/>
 
+            <TextView
+                android:text="Komentar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/komenlabel"
+                android:paddingTop="16dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:id="@+id/emptytext" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:listSelector="@android:color/transparent"
+                    android:id="@+id/komen" />
+            </RelativeLayout>
+
+            <TextView
+                android:text="Nama:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/labelnama"
+                android:paddingTop="16dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Nama"
+                android:ems="10"
+                android:id="@+id/editTextNama" />
+
+            <TextView
+                android:text="Komentar:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/labelkomentar" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:hint="Tulis komentar anda..."
+                android:ems="10"
+                android:id="@+id/editKomentar" />
+
+            <Button
+                android:text="Submit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/submit" />
+
 
         </LinearLayout>
     </ScrollView>

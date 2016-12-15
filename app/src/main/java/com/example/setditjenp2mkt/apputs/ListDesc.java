@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static android.R.attr.id;
 
@@ -17,15 +20,18 @@ import static android.R.attr.id;
 
 public class ListDesc extends ArrayAdapter<String> {
     private Activity context;
-    private String[] itemname;
-    private Integer[] imgid;
+    private ArrayList<String> akun = new ArrayList<>();
+    private ArrayList<Integer> imgid = new ArrayList<>();
+    private ArrayList<String> comment = new ArrayList<>();
+    public TextView like;
 
-    public ListDesc(Activity context, String[] itemname, Integer[] imgid) {
-        super(context, R.layout.layout_listdesc, itemname);
+    public ListDesc(Activity context, ArrayList<String> akun, ArrayList<Integer> imgid, ArrayList<String> comment) {
+        super(context, R.layout.layout_listdesc, akun);
 
         this.context=context;
-        this.itemname=itemname;
+        this.akun=akun;
         this.imgid=imgid;
+        this.comment=comment;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -34,9 +40,14 @@ public class ListDesc extends ArrayAdapter<String> {
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
+        like = (TextView) rowView.findViewById(R.id.like);
 
-        txtTitle.setText(itemname[position]);
-        imageView.setImageBitmap(ImageNicer.decodeSampledBitmapFromResource(context.getResources(), imgid[position], 100, 100));
+        txtTitle.setText(akun.get(position));
+        imageView.setImageBitmap(ImageNicer.decodeSampledBitmapFromResource(context.getResources(), imgid.get(position), 100, 100));
+        extratxt.setText(comment.get(position));
+        like.setText("Suka");
+
         return rowView;
 
     };

@@ -124,6 +124,12 @@ public class MainActivity extends AppCompatActivity{
             Log.d("name:", name.get(i).toString());
         }
 
+        for (int i = 0; i < name.size(); i++){
+            WisataActivity.all_account_wisata.add(new ArrayList<ArrayList<String>>());
+            WisataActivity.all_profpict_wisata.add(new ArrayList<ArrayList<Integer>>());
+            WisataActivity.all_comment_wisata.add(new ArrayList<ArrayList<String>>());
+        }
+
         CustomListAdapter adapter = new CustomListAdapter(this, name, img);
         list = (ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
