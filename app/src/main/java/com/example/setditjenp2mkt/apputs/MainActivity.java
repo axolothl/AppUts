@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
             //R.mipmap.bandung,
             //R.mipmap.semarang,
             R.mipmap.jogja,
-            //R.mipmap.malang,
+            ////R.mipmap.malang,
             R.mipmap.surabaya
     };
 
