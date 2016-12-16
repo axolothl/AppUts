@@ -10,8 +10,6 @@
     android:background="@drawable/splashs"
     tools:context="com.example.setditjenp2mkt.apputs.SplashScreen">
 
-
-
     <ProgressBar
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
@@ -20,6 +18,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="188dp"
         android:id="@+id/progressBar4" />
-
 
 </RelativeLayout>

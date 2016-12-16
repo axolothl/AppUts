@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="201dp"
             app:srcCompat="@mipmap/subhead"
             android:id="@+id/imageView7"
             android:adjustViewBounds="false"
