@@ -62,12 +62,25 @@
                 android:textSize="18sp"
                 android:id="@+id/textView2" />
 
-            <ListView
-                android:id="@+id/wisata_aceh"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="10dp"
-                android:layout_weight="6.53"
-                android:layout_height="175dp" />
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/wisata_aceh"
+                    android:layout_width="match_parent"
+                    android:paddingBottom="10dp"
+                    android:layout_weight="6.53"
+                    android:layout_height="175dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:id="@+id/emptytext" />
+
+            </RelativeLayout>
 
             <TextView
                 android:text="Rekomendasi Kuliner:"
@@ -76,11 +89,24 @@
                 android:textSize="18sp"
                 android:id="@+id/textView3" />
 
-            <ListView
-                android:id="@+id/kuliner_aceh"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_weight="4.86"
-                android:layout_height="175dp" />
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/kuliner_aceh"
+                    android:layout_width="match_parent"
+                    android:layout_weight="4.86"
+                    android:layout_height="175dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:id="@+id/emptytext1" />
+            </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
 

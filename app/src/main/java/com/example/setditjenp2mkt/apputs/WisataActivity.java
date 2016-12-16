@@ -28,21 +28,11 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
     EditText nama, komen;
     Button submit;
     ListDesc listDesc;
+    public int position, city_position;
+    public String city;
     public static ArrayList<ArrayList<ArrayList<String>>> all_account_wisata = new ArrayList<ArrayList<ArrayList<String>>>();
-    public static ArrayList<ArrayList<String>> all_account_wisataaceh = new ArrayList<ArrayList<String>>();
-    public static ArrayList<ArrayList<String>> all_account_wisatajogja = new ArrayList<ArrayList<String>>();
-    public static ArrayList<ArrayList<String>> all_account_wisatasurabaya = new ArrayList<ArrayList<String>>();
-    public static ArrayList<String> account = new ArrayList<>();
     public static ArrayList<ArrayList<ArrayList<Integer>>> all_profpict_wisata = new ArrayList<ArrayList<ArrayList<Integer>>>();
-    public static ArrayList<ArrayList<Integer>> all_profpict_wisataaceh = new ArrayList<ArrayList<Integer>>();
-    public static ArrayList<ArrayList<Integer>> all_profpict_wisatajogja = new ArrayList<ArrayList<Integer>>();
-    public static ArrayList<ArrayList<Integer>> all_profpict_wisatasurabaya = new ArrayList<ArrayList<Integer>>();
-    public static ArrayList<Integer> profpict = new ArrayList<>();
     public static ArrayList<ArrayList<ArrayList<String>>> all_comment_wisata = new ArrayList<ArrayList<ArrayList<String>>>();
-    public static ArrayList<ArrayList<String>> all_comment_wisataaceh = new ArrayList<ArrayList<String>>();
-    public static ArrayList<ArrayList<String>> all_comment_wisatajogja = new ArrayList<ArrayList<String>>();
-    public static ArrayList<ArrayList<String>> all_comment_wisatasurabaya = new ArrayList<ArrayList<String>>();
-    public static ArrayList<String> comment = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +51,13 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         setTitle("Tempat Wisata");
         Intent intent = getIntent();
         String tempatwisata = intent.getStringExtra("namawisata");
-        final int position = intent.getIntExtra("position", 0);
-        final int city_position = intent.getIntExtra("city_position", 0);
+        position = intent.getIntExtra("position", 0);
+        city_position = intent.getIntExtra("city_position", 0);
+        city = intent.getStringExtra("city");
         namawisata.setText(tempatwisata);
         imgwisata.setImageResource(KotaActivity.imgwisata1.get(city_position).get(position));
         komentar.setEmptyView(emptyTV);
-        if (all_account_wisata.get(city_position).get(position).size() == 0){
+        if (all_comment_wisata.get(city_position).get(position).size() == 0){
             listDesc = new ListDesc(this, new ArrayList<String>(), new ArrayList<Integer>(), new ArrayList<String>());
             emptyTV.setText("Tidak ada komentar");
         } else{
@@ -91,11 +82,8 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onClick(View v) {
                 if (nama.getText().toString() != "" || komen.getText().toString() != ""){
-                    //account.add(nama.getText().toString());
                     all_account_wisata.get(city_position).get(position).add(nama.getText().toString());
-                    //profpict.add(R.mipmap.potoprofil);
                     all_profpict_wisata.get(city_position).get(position).add(R.mipmap.potoprofil);
-                    //comment.add(komen.getText().toString());
                     all_comment_wisata.get(city_position).get(position).add(komen.getText().toString());
                     Toast.makeText(getApplicationContext(), "Komentar telah di submit", Toast.LENGTH_SHORT).show();
                 } else{
@@ -103,15 +91,24 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 }
                 Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
                 startActivity(reOpen);
-                finish();
+                //finish();
                 overridePendingTransition( 0, 0);
                 startActivity(getIntent());
                 overridePendingTransition( 0, 0);
-                finish();
                 listDesc.notifyDataSetChanged();
                 UIUtils.setListViewHeightBasedOnItems(komentar);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(WisataActivity.this, KotaActivity.class);
+        intent.putExtra("position", position);
+        intent.putExtra("city_position", city_position);
+        intent.putExtra("city", city);
+        startActivity(intent);
+        return;
     }
 
     @Override

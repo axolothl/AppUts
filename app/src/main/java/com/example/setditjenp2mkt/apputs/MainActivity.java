@@ -102,18 +102,22 @@ public class MainActivity extends AppCompatActivity{
             name.add(kota_baru);
             img.add(R.mipmap.noimageicon);
             KotaActivity.imgheaderkota1.add(R.mipmap.noimage);
-            ArrayList<String> wisatabaru = new ArrayList<>();
-            wisatabaru.add("kosong");
-            ArrayList<String> kulinerbaru = new ArrayList<>();
-            kulinerbaru.add("kosong");
-            ArrayList<Integer> imgwisatabaru = new ArrayList<>();
-            imgwisatabaru.add(R.mipmap.noimageicon);
-            ArrayList<Integer> imgkulinerbaru = new ArrayList<>();
-            imgkulinerbaru.add(R.mipmap.noimageicon);
-            KotaActivity.namawisata1.add(wisatabaru);
-            KotaActivity.kuliner1.add(kulinerbaru);
-            KotaActivity.imgwisata1.add(imgwisatabaru);
-            KotaActivity.imgkuliner1.add(imgkulinerbaru);
+            KotaActivity.namawisata1.add(new ArrayList<String>());
+            KotaActivity.kuliner1.add(new ArrayList<String>());
+            KotaActivity.imgwisata1.add(new ArrayList<Integer>());
+            KotaActivity.imgkuliner1.add(new ArrayList<Integer>());
+            //ArrayList<String> wisatabaru = new ArrayList<>();
+            //wisatabaru.add("kosong");
+            //ArrayList<String> kulinerbaru = new ArrayList<>();
+            //kulinerbaru.add("kosong");
+            //ArrayList<Integer> imgwisatabaru = new ArrayList<>();
+            //imgwisatabaru.add(R.mipmap.noimageicon);
+            //ArrayList<Integer> imgkulinerbaru = new ArrayList<>();
+            //imgkulinerbaru.add(R.mipmap.noimageicon);
+            //KotaActivity.namawisata1.add(wisatabaru);
+            //KotaActivity.kuliner1.add(kulinerbaru);
+            //KotaActivity.imgwisata1.add(imgwisatabaru);
+            //KotaActivity.imgkuliner1.add(imgkulinerbaru);
             KotaActivity.deskripsi1.add("Tidak ada deskripsi");
         }
         header = (ImageView)findViewById(R.id.imageView7);
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity{
                 String Selecteditem = name.get(position);
                 Toast.makeText(getApplicationContext(), Selecteditem, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, KotaActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra("city_position", position);
                 intent.putExtra("city", Selecteditem);
                 startActivity(intent);
             }

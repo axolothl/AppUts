@@ -34,11 +34,30 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".KotaActivity" />
-        <activity android:name=".WisataActivity" />
-        <activity android:name=".KulinerActivity" />
-        <activity android:name=".AddActivity" />
-        <activity android:name=".EditActivity"></activity>
+
+        <activity android:name=".KotaActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+
+
+        <activity android:name=".WisataActivity"
+            android:parentActivityName=".KotaActivity"></activity>
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+
+
+        <activity android:name=".KulinerActivity"
+            android:parentActivityName=".KotaActivity"></activity>
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+
+
+        <activity android:name=".AddActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+
+
+        <activity android:name=".EditActivity"
+            android:parentActivityName=".KotaActivity"></activity>
+
     </application>
 
 </manifest>

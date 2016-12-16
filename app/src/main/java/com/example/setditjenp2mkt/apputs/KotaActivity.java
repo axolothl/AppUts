@@ -22,10 +22,12 @@ import java.util.ArrayList;
 import static com.example.setditjenp2mkt.apputs.MainActivity.img;
 
 public class KotaActivity extends AppCompatActivity {
-    MainActivity mainActivity;
+    CustomListAdapter customListAdapter;
     ListView wisata, makanan;
-    TextView tvdesc, tvname;
+    TextView tvdesc, tvname, empty_wisata, empty_kuliner;
     ImageView headerkota;
+    public int city_position, position;
+    public String city;
     public static String[] wisataaceh = {
             "Masjid Raya Baiturrahman",
             "Air Terjun Blang Kolam",
@@ -149,53 +151,61 @@ public class KotaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kota);
         Intent intent = getIntent();
-        final String city = intent.getStringExtra("city");
+        city = intent.getStringExtra("city");
         setTitle("Tentang " + city);
-        final int city_position = intent.getIntExtra("position", 0);
+        city_position = intent.getIntExtra("city_position", 0);
+        position = intent.getIntExtra("position", 0);
 
         tvname = (TextView)findViewById(R.id.namakota);
         tvdesc = (TextView)findViewById(R.id.kontendeskripsi);
+        empty_wisata = (TextView)findViewById(R.id.emptytext);
+        empty_kuliner = (TextView)findViewById(R.id.emptytext1);
         headerkota = (ImageView)findViewById(R.id.icon);
 
         tvname.setText(city);
         tvdesc.setText(deskripsi1.get(city_position));
         headerkota.setImageResource(imgheaderkota1.get(city_position));
 
-        for (int i = 0; i < namawisata1.size(); i++){
+        for (int i = 0; i < namawisata1.get(city_position).size(); i++){
             WisataActivity.all_account_wisata.get(city_position).add(new ArrayList<String>());
             WisataActivity.all_profpict_wisata.get(city_position).add(new ArrayList<Integer>());
             WisataActivity.all_comment_wisata.get(city_position).add(new ArrayList<String>());
         }
 
-        CustomListAdapter adapter = new CustomListAdapter(this, namawisata1.get(city_position), imgwisata1.get(city_position));
         wisata = (ListView)findViewById(R.id.wisata_aceh);
-        wisata.setAdapter(adapter);
-
-        for (int i = 0; i < KotaActivity.namawisata1.size(); i++) {
-            Log.d("namawisata1:", KotaActivity.namawisata1.get(i).toString());
+        wisata.setEmptyView(empty_wisata);
+        if (namawisata1.get(city_position).size() == 0){
+            customListAdapter = new CustomListAdapter(this, new ArrayList<String>(), new ArrayList<Integer>());
+            empty_wisata.setText("Tidak ada tempat wisata");
+        } else {
+            customListAdapter = new CustomListAdapter(this, namawisata1.get(city_position), imgwisata1.get(city_position));
         }
+        wisata.setAdapter(customListAdapter);
 
         wisata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (namawisata1.get(position).get(0) != "kosong"){
-                    Intent intent = new Intent(KotaActivity.this, WisataActivity.class);
-                    String selecteditem = namawisata1.get(city_position).get(position);
-                    intent.putExtra("namawisata", selecteditem);
-                    intent.putExtra("position", position);
-                    intent.putExtra("city_position", city_position);
-                    Toast.makeText(getApplicationContext(), selecteditem, Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(), "kosong", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(KotaActivity.this, WisataActivity.class);
+                String selecteditem = namawisata1.get(city_position).get(position);
+                intent.putExtra("namawisata", selecteditem);
+                intent.putExtra("position", position);
+                intent.putExtra("city_position", city_position);
+                intent.putExtra("city", city);
+                Toast.makeText(getApplicationContext(), selecteditem, Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
 
-        CustomListAdapter adapter2 = new CustomListAdapter(this, kuliner1.get(city_position), imgkuliner1.get(city_position));
         makanan = (ListView)findViewById(R.id.kuliner_aceh);
-        makanan.setAdapter(adapter2);
+        makanan.setEmptyView(empty_kuliner);
+        if (kuliner1.get(city_position).size() == 0){
+            customListAdapter = new CustomListAdapter(this, new ArrayList<String>(), new ArrayList<Integer>());
+            empty_kuliner.setText("Tidak ada kuliner");
+        } else {
+            customListAdapter = new CustomListAdapter(this, kuliner1.get(city_position), imgkuliner1.get(city_position));
+        }
+        makanan.setAdapter(customListAdapter);
 
         makanan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -210,6 +220,13 @@ public class KotaActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(KotaActivity.this, MainActivity.class);
+        startActivity(intent);
+        return;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
