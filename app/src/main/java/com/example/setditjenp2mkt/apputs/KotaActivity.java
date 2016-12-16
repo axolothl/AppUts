@@ -240,31 +240,31 @@ public class KotaActivity extends AppCompatActivity {
             case R.id.edit_deskripsi:
                 Intent intent = new Intent(KotaActivity.this, EditActivity.class);
                 Intent intent5 = getIntent();
-                int city_position2 = intent5.getIntExtra("position", 0);
+                city_position = intent5.getIntExtra("city_position", 0);
                 String deskripsi = tvdesc.getText().toString();
                 intent.putExtra("deskripsi", deskripsi);
                 intent.putExtra("kode", 1);
-                intent.putExtra("position", city_position2);
+                intent.putExtra("city_position", city_position);
                 startActivity(intent);
                 return true;
             case R.id.edit_wisata:
                 Intent intent1 = new Intent(KotaActivity.this, EditActivity.class);
                 Intent intent2 = getIntent();
-                int city_position = intent2.getIntExtra("position", 0);
+                city_position = intent2.getIntExtra("city_position", 0);
                 String wisata = namawisata1.get(city_position).toString();
                 intent1.putExtra("wisata", wisata);
                 intent1.putExtra("kode", 2);
-                intent1.putExtra("position", city_position);
+                intent1.putExtra("city_position", city_position);
                 startActivity(intent1);
                 return true;
             case R.id.edit_kuliner:
                 Intent intent3 = new Intent(KotaActivity.this, EditActivity.class);
                 Intent intent4 = getIntent();
-                int city_position1 = intent4.getIntExtra("position", 0);
-                String kuliner = kuliner1.get(city_position1).toString();
+                city_position = intent4.getIntExtra("city_position", 0);
+                String kuliner = kuliner1.get(city_position).toString();
                 intent3.putExtra("kuliner", kuliner);
                 intent3.putExtra("kode", 3);
-                intent3.putExtra("position", city_position1);
+                intent3.putExtra("city_position", city_position);
                 startActivity(intent3);
                 return true;
             default:

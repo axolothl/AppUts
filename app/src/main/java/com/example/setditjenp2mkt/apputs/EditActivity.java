@@ -44,29 +44,21 @@ public class EditActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditActivity.this, MainActivity.class);
+                Intent intent = new Intent(EditActivity.this, KotaActivity.class);
                 if (kode == 1){
                     Intent inten = getIntent();
-                    int position = inten.getIntExtra("position", 0);
+                    int position = inten.getIntExtra("city_position", 0);
                     KotaActivity.deskripsi1.set(position, editDeskripsi.getText().toString());
                 } else if (kode == 2){
                     Intent inten = getIntent();
-                    int position = inten.getIntExtra("position", 0);
+                    int position = inten.getIntExtra("city_position", 0);
                     wisata = editDeskripsi.getText().toString();
-                    if (KotaActivity.namawisata1.get(position).get(0) == "kosong"){
-                        KotaActivity.namawisata1.get(position).clear();
-                        KotaActivity.imgwisata1.get(position).clear();
-                    }
                     KotaActivity.namawisata1.get(position).add(wisata);
                     KotaActivity.imgwisata1.get(position).add(R.mipmap.noimageicon);
                 } else if (kode == 3){
                     Intent inten = getIntent();
-                    int position = inten.getIntExtra("position", 0);
+                    int position = inten.getIntExtra("city_position", 0);
                     kuliner = editDeskripsi.getText().toString();
-                    if (KotaActivity.kuliner1.get(position).get(0) == "kosong"){
-                        KotaActivity.kuliner1.get(position).clear();
-                        KotaActivity.imgkuliner1.get(position).clear();
-                    }
                     KotaActivity.kuliner1.get(position).add(kuliner);
                     KotaActivity.imgkuliner1.get(position).add(R.mipmap.noimageicon);
                 }
