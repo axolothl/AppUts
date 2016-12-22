@@ -5,10 +5,10 @@
     <item android:title="Edit Deskripsi"
         android:id="@+id/edit_deskripsi"
         app:showAsAction="never" />
-    <item android:title="Edit Tempat Wisata"
+    <item android:title="Tambah Tempat Wisata"
         android:id="@+id/edit_wisata"
         app:showAsAction="never" />
-    <item android:title="Edit Kuliner"
+    <item android:title="Tambah Kuliner"
         android:id="@+id/edit_kuliner"
         app:showAsAction="never" />
 

@@ -53,8 +53,6 @@
                 android:text="Hapus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:onClick="onClick"
                 android:paddingLeft="20dp"
                 android:id="@+id/deletecomment"
                 android:layout_weight="1" />

@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 //setelah 5 detik, maka akan kita arahkan ke halaman utama
-                Intent a = new Intent(getApplicationContext(), MainActivity.class);
+                Intent a = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(a);
                 finish();
             }

@@ -90,22 +90,6 @@
             </RelativeLayout>
 
             <TextView
-                android:text="Nama:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:id="@+id/labelnama"
-                android:paddingTop="16dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Nama"
-                android:ems="10"
-                android:id="@+id/editTextNama" />
-
-            <TextView
                 android:text="Komentar:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

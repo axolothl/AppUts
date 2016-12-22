@@ -26,8 +26,8 @@ public class KotaActivity extends AppCompatActivity {
     ListView wisata, makanan;
     TextView tvdesc, tvname, empty_wisata, empty_kuliner;
     ImageView headerkota;
-    public int city_position, position;
-    public String city;
+    public int city_position, position, status_check;
+    public String city, username;
     public static String[] wisataaceh = {
             "Masjid Raya Baiturrahman",
             "Air Terjun Blang Kolam",
@@ -151,10 +151,12 @@ public class KotaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kota);
         Intent intent = getIntent();
+        status_check = intent.getIntExtra("status", 0);
         city = intent.getStringExtra("city");
         setTitle("Tentang " + city);
         city_position = intent.getIntExtra("city_position", 0);
         position = intent.getIntExtra("position", 0);
+        username = intent.getStringExtra("username");
 
         tvname = (TextView)findViewById(R.id.namakota);
         tvdesc = (TextView)findViewById(R.id.kontendeskripsi);
@@ -170,6 +172,12 @@ public class KotaActivity extends AppCompatActivity {
             WisataActivity.all_account_wisata.get(city_position).add(new ArrayList<String>());
             WisataActivity.all_profpict_wisata.get(city_position).add(new ArrayList<Integer>());
             WisataActivity.all_comment_wisata.get(city_position).add(new ArrayList<String>());
+        }
+
+        for (int i = 0; i < kuliner1.get(city_position).size(); i++){
+            KulinerActivity.all_account_kuliner.get(city_position).add(new ArrayList<String>());
+            KulinerActivity.all_profpict_kuliner.get(city_position).add(new ArrayList<Integer>());
+            KulinerActivity.all_comment_kuliner.get(city_position).add(new ArrayList<String>());
         }
 
         wisata = (ListView)findViewById(R.id.wisata_aceh);
@@ -192,6 +200,8 @@ public class KotaActivity extends AppCompatActivity {
                 intent.putExtra("position", position);
                 intent.putExtra("city_position", city_position);
                 intent.putExtra("city", city);
+                intent.putExtra("status", status_check);
+                intent.putExtra("username", username);
                 Toast.makeText(getApplicationContext(), selecteditem, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
@@ -216,6 +226,9 @@ public class KotaActivity extends AppCompatActivity {
                 intent.putExtra("namakuliner", selecteditem);
                 intent.putExtra("position", position);
                 intent.putExtra("city_position", city_position);
+                intent.putExtra("city", city);
+                intent.putExtra("status", status_check);
+                intent.putExtra("username", username);
                 Toast.makeText(getApplicationContext(), selecteditem, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
@@ -225,13 +238,18 @@ public class KotaActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(KotaActivity.this, MainActivity.class);
+        intent.putExtra("status", status_check);
         startActivity(intent);
         return;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_editkota, menu);
+        Intent intent = getIntent();
+        status_check = intent.getIntExtra("status", 0);
+        if (status_check == 1){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_editkota, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item) {

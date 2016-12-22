@@ -19,7 +19,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
     ImageView header;
     ListView list;
+    int status_check;
     public Boolean check;
+    String username;
     public static ArrayList<String> name = new ArrayList<>();
     String[] itemname = {
             "Aceh",
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        status_check = intent.getIntExtra("status", 0);
         String kota_baru = intent.getStringExtra("kota_baru");
+        setTitle("Selamat Datang, " + username);
         check = intent.getBooleanExtra("add", false);
         if (name.size() == 0){
             for (int i = 0;i < itemname.length;i++){
@@ -134,6 +139,12 @@ public class MainActivity extends AppCompatActivity{
             WisataActivity.all_comment_wisata.add(new ArrayList<ArrayList<String>>());
         }
 
+        for (int i = 0; i < name.size(); i++){
+            KulinerActivity.all_account_kuliner.add(new ArrayList<ArrayList<String>>());
+            KulinerActivity.all_profpict_kuliner.add(new ArrayList<ArrayList<Integer>>());
+            KulinerActivity.all_comment_kuliner.add(new ArrayList<ArrayList<String>>());
+        }
+
         CustomListAdapter adapter = new CustomListAdapter(this, name, img);
         list = (ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
@@ -147,14 +158,27 @@ public class MainActivity extends AppCompatActivity{
                 Intent intent = new Intent(MainActivity.this, KotaActivity.class);
                 intent.putExtra("city_position", position);
                 intent.putExtra("city", Selecteditem);
+                intent.putExtra("status", status_check);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        return;
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        Intent intent = getIntent();
+        status_check = intent.getIntExtra("status", 0);
+        if (status_check == 1){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_main, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
