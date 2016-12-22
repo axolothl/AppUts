@@ -22,7 +22,7 @@
             android:weightSum="1">
 
             <TextView
-                android:text="Museum Tsunami"
+                android:text="Tempat Wisata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -34,12 +34,11 @@
             <ImageView
                 android:id="@+id/icon"
                 android:layout_width="match_parent"
-                app:srcCompat="@mipmap/museumtsunami"
                 android:padding="5dp"
                 android:layout_height="250dp" />
 
             <TextView
-                android:text="Museum Tsunami Aceh dirancang oleh arsitek asal Indonesia, Ridwan Kamil. Museum ini merupakan sebuah struktur empat lantai dengan luas 2.500 m² yang dinding lengkungnya ditutupi relief geometris. Di dalamnya, pengunjung masuk melalui lorong sempit dan gelap di antara dua dinding air yang tinggi — untuk menciptakan kembali suasana dan kepanikan saat tsunami. Dinding museum dihiasi gambar orang-orang menari Saman, sebuah makna simbolis terhadap kekuatan, disiplin, dan kepercayaan religius suku Aceh. Dari atas, atapnya membentuk gelombang laut. Lantai dasarnya dirancang mirip rumah panggung tradisional Aceh yang selamat dari terjangan tsunami"
+                android:text="Tidak ada deskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -59,7 +58,8 @@
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"/>
+                android:layout_height="250dp" />
+
         </LinearLayout>
     </ScrollView>
 

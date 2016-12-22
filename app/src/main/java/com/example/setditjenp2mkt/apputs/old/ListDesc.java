@@ -1,4 +1,4 @@
-package com.example.setditjenp2mkt.apputs;
+package com.example.setditjenp2mkt.apputs.old;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.setditjenp2mkt.apputs.R;
 import com.example.setditjenp2mkt.apputs.utils.ImageNicer;
 
 /**
