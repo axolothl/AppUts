@@ -239,6 +239,7 @@ public class KotaActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(KotaActivity.this, MainActivity.class);
         intent.putExtra("status", status_check);
+        intent.putExtra("username", username);
         startActivity(intent);
         return;
     }
