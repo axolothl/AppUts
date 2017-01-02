@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AppUts</string>
+    <string name="google_maps_key">AIzaSyBHsx8JWbkJl9Gmd9h5KYx2J4BLG7qKvF0</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registered! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="name">Fullname</string>
+</resources>
