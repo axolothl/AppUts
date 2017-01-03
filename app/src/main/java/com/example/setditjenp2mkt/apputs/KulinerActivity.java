@@ -67,27 +67,6 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         }
         komentar.setAdapter(listDesc);
         UIUtils.setListViewHeightBasedOnItems(komentar);
-        komentar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position_id, long id) {
-                if (listDesc.check_del == 1){
-                    all_account_kuliner.get(city_position).get(position).remove(position_id);
-                    all_profpict_kuliner.get(city_position).get(position).remove(position_id);
-                    all_comment_kuliner.get(city_position).get(position).remove(position_id);
-                    listDesc.check_del = 0;
-                    Toast.makeText(getApplicationContext(), "Komentar telah di hapus", Toast.LENGTH_SHORT).show();
-                    Intent reOpen = new Intent (KulinerActivity.this, KulinerActivity.class);
-                    startActivity(reOpen);
-                    finish();
-                    overridePendingTransition( 0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition( 0, 0);
-                    listDesc.notifyDataSetChanged();
-                    UIUtils.setListViewHeightBasedOnItems(komentar);
-                }
-            }
-        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +89,22 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                 UIUtils.setListViewHeightBasedOnItems(komentar);
             }
         });
+    }
+
+    public void onDelete_click(View view) {
+        final int position_id = (Integer) view.getTag();
+        all_account_kuliner.get(city_position).get(position).remove(position_id);
+        all_profpict_kuliner.get(city_position).get(position).remove(position_id);
+        all_comment_kuliner.get(city_position).get(position).remove(position_id);
+        Toast.makeText(getApplicationContext(), "Komentar telah di hapus", Toast.LENGTH_SHORT).show();
+        Intent reOpen = new Intent (KulinerActivity.this, KulinerActivity.class);
+        startActivity(reOpen);
+        finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+        listDesc.notifyDataSetChanged();
+        UIUtils.setListViewHeightBasedOnItems(komentar);
     }
 
     @Override

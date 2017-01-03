@@ -22,13 +22,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class WisataActivity extends AppCompatActivity implements OnMapReadyCallback {
-    TextView namawisata, deskripsi_wisata, emptyTV, like, delete;
+    TextView namawisata, deskripsi_wisata, emptyTV, delete;
     ImageView imgwisata;
-    ListView komentar;
-    EditText nama, komen;
+    public ListView komentar;
+    EditText komen;
     Button submit;
     ListDesc listDesc;
     public int position, city_position, status_check;
+    public boolean komen_check = false;
     public String city, username;
     public static ArrayList<ArrayList<ArrayList<String>>> all_account_wisata = new ArrayList<ArrayList<ArrayList<String>>>();
     public static ArrayList<ArrayList<ArrayList<Integer>>> all_profpict_wisata = new ArrayList<ArrayList<ArrayList<Integer>>>();
@@ -41,13 +42,11 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         namawisata = (TextView)findViewById(R.id.namawisata);
         deskripsi_wisata = (TextView)findViewById(R.id.kontendeskripsi);
         emptyTV = (TextView)findViewById(R.id.emptytext);
-        //like = (TextView)findViewById(R.id.like);
-        //delete = (TextView)findViewById(R.id.deletecomment);
         imgwisata = (ImageView)findViewById(R.id.icon);
-        //nama = (EditText)findViewById(R.id.editTextNama);
         komen = (EditText)findViewById(R.id.editKomentar);
         submit = (Button)findViewById(R.id.submit);
         komentar = (ListView)findViewById(R.id.komen);
+        komentar.setItemsCanFocus(true);
         setTitle("Tempat Wisata");
         Intent intent = getIntent();
         status_check = intent.getIntExtra("status", 0);
@@ -67,27 +66,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         }
         komentar.setAdapter(listDesc);
         UIUtils.setListViewHeightBasedOnItems(komentar);
-        komentar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position_id, long id) {
-                if (listDesc.check_del == 1){
-                    all_account_wisata.get(city_position).get(position).remove(position_id);
-                    all_profpict_wisata.get(city_position).get(position).remove(position_id);
-                    all_comment_wisata.get(city_position).get(position).remove(position_id);
-                    listDesc.check_del = 0;
-                    Toast.makeText(getApplicationContext(), "Komentar telah di hapus", Toast.LENGTH_SHORT).show();
-                    Intent reOpen = new Intent (WisataActivity.this, KulinerActivity.class);
-                    startActivity(reOpen);
-                    finish();
-                    overridePendingTransition( 0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition( 0, 0);
-                    listDesc.notifyDataSetChanged();
-                    UIUtils.setListViewHeightBasedOnItems(komentar);
-                }
-            }
-        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +78,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 } else{
                     Toast.makeText(getApplicationContext(), "Lengkapi field", Toast.LENGTH_SHORT).show();
                 }
+                komen_check = true;
                 Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
                 startActivity(reOpen);
                 //finish();
@@ -110,6 +89,23 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 UIUtils.setListViewHeightBasedOnItems(komentar);
             }
         });
+
+    }
+
+    public void onDelete_click(View view) {
+        final int position_id = (Integer) view.getTag();
+        all_account_wisata.get(city_position).get(position).remove(position_id);
+        all_profpict_wisata.get(city_position).get(position).remove(position_id);
+        all_comment_wisata.get(city_position).get(position).remove(position_id);
+        Toast.makeText(getApplicationContext(), "Komentar telah di hapus", Toast.LENGTH_SHORT).show();
+        Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
+        startActivity(reOpen);
+        finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+        listDesc.notifyDataSetChanged();
+        UIUtils.setListViewHeightBasedOnItems(komentar);
     }
 
     @Override
