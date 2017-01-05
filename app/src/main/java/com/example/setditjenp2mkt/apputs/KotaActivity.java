@@ -97,7 +97,7 @@ public class KotaActivity extends AppCompatActivity {
                 HashMap<String,String> map_kuliner = DaftarKuliner.get(position);
                 Toast.makeText(getApplicationContext(), "Data "+map_kuliner.get(Global.NAMA_TEMPAT), Toast.LENGTH_SHORT).show();
                 Intent a = new Intent(getApplicationContext(), KulinerActivity.class);
-                a.putExtra(Global.ID, id);
+                a.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 a.putExtra(Global.ID_KULINER, map_kuliner.get(Global.ID_KULINER));
                 a.putExtra(Global.LONGI, map_kuliner.get(Global.LONGI));
                 a.putExtra(Global.LATI, map_kuliner.get(Global.LATI));
@@ -224,14 +224,14 @@ public class KotaActivity extends AppCompatActivity {
                 for(int i = 0; i < jsonArray.length(); i++){
                     JSONObject c = jsonArray.getJSONObject(i);
                     String id_kota = c.getString("id_kota");
-                    String id_wisata = c.getString("id_kuliner");
+                    String id_kuliner = c.getString("id_kuliner");
                     String nama_tempat = c.getString("nama_tempat");
                     String lati = c.getString("langi");
                     String longi = c.getString("longi");
                     String gbr = Global.GET_IMAGE_KULINER+ c.getString("gambar");
                     HashMap<String,String> map_kuliner = new HashMap<>();
                     map_kuliner.put(Global.GAMBAR_KULINER,gbr);
-                    map_kuliner.put(Global.ID_KULINER,id_wisata);
+                    map_kuliner.put(Global.ID_KULINER,id_kuliner);
                     map_kuliner.put(Global.ID_KOTA,id_kota);
                     map_kuliner.put(Global.NAMA_TEMPAT,nama_tempat);
                     map_kuliner.put(Global.LATI,lati);
