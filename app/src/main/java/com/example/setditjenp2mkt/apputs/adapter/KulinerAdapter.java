@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.setditjenp2mkt.apputs.R;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class KulinerAdapter extends BaseAdapter {
 
         id_kuliner.setText(daftar_kuliner.get(Global.ID_KULINER));
         txtTitle.setText(daftar_kuliner.get(Global.NAMA_TEMPAT));
-        imageLoader.DisplayImage(daftar_kuliner.get(Global.GAMBAR),imageView);
+        Picasso.with(KulinerAdapter.inflater.getContext()).load(daftar_kuliner.get(Global.GAMBAR_KULINER)).into(imageView);
         return rowView;
     }
 

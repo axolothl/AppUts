@@ -9,9 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.setditjenp2mkt.apputs.MainActivity;
 import com.example.setditjenp2mkt.apputs.R;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,8 @@ import java.util.HashMap;
 public class ListAdapter extends BaseAdapter {
 
     private Activity activity;
+    private ListAdapter listAdapter;
+    private MainActivity mainActivity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
     public ImageLoader imageLoader;
@@ -66,7 +70,8 @@ public class ListAdapter extends BaseAdapter {
         id_kota.setText(daftar_kota.get(Global.ID));
         extratxt.setText("Pilih untuk info tentang " + (daftar_kota.get(Global.KOTA)));
         txtTitle.setText(daftar_kota.get(Global.KOTA));
-        imageLoader.DisplayImage(daftar_kota.get(Global.GAMBAR),imageView);
+//        imageLoader.DisplayImage(daftar_kota.get(Global.GAMBAR),imageView);
+        Picasso.with(activity.getApplicationContext()).load(daftar_kota.get(Global.GAMBAR)).into(imageView);
         return rowView;
     }
 }

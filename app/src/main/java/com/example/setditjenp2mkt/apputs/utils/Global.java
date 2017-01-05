@@ -22,8 +22,8 @@ public class Global {
     public static final String URL_REGISTER = BASE_URL+"Welcome/registration_endpoint";
 
 
-//    public static final String BASE_URL="http://192.168.0.106/pantura/Welcome/";
-//    public static final String BASE_IMG="http://192.168.0.106/pantura/img_kota/";
+//    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";
+//    public static final String BASE_IMG="http://192.168.32.57/pantura/img_kota/";
 //
 //    public static final String URL_LOGIN = BASE_URL+"login_endpoint";
 //    public static final String URL_REGISTER = BASE_URL+"registration_endpoint";

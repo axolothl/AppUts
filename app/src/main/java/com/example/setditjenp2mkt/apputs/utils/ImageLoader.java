@@ -87,7 +87,7 @@ public class ImageLoader {
 			o.inJustDecodeBounds = true;
 			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
 
-			final int REQUIRED_SIZE = 70;
+			final int REQUIRED_SIZE = 1024;
 			int width_tmp = o.outWidth, height_tmp = o.outHeight;
 			int scale = 1;
 			while (true) {

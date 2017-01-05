@@ -54,9 +54,9 @@
                 android:textSize="18sp"
                 android:id="@+id/textView2" />
 
-            <fragment
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map_wisata"
                 android:name="com.google.android.gms.maps.MapFragment"
-                android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="250dp" />
 

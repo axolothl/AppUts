@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -33,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private JSONParser jsonParser = new JSONParser();
     ArrayList<HashMap<String, String>> DaftarKota = new ArrayList<>();
     private ProgressDialog progressDialog;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         header = (ImageView)findViewById(R.id.imageView7);
         list = (ListView)findViewById(R.id.list);
         DaftarKota = new ArrayList<>();

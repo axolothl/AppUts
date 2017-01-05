@@ -28,6 +28,7 @@ import com.example.setditjenp2mkt.apputs.adapter.WisataAdapter;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -79,8 +80,10 @@ public class KotaActivity extends AppCompatActivity {
                 HashMap<String,String> map_wisata = DaftarWisata.get(position);
                 Toast.makeText(getApplicationContext(), "Data "+map_wisata.get(Global.NAMA_TEMPAT), Toast.LENGTH_SHORT).show();
                 Intent a = new Intent(getApplicationContext(),WisataActivity.class);
-                a.putExtra(Global.ID, id);
+                a.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 a.putExtra(Global.ID_WISATA, map_wisata.get(Global.ID_WISATA));
+                a.putExtra(Global.LONGI, map_wisata.get(Global.LONGI));
+                a.putExtra(Global.LATI, map_wisata.get(Global.LATI));
                 startActivity(a);
             }
         });
@@ -96,6 +99,8 @@ public class KotaActivity extends AppCompatActivity {
                 Intent a = new Intent(getApplicationContext(), KulinerActivity.class);
                 a.putExtra(Global.ID, id);
                 a.putExtra(Global.ID_KULINER, map_kuliner.get(Global.ID_KULINER));
+                a.putExtra(Global.LONGI, map_kuliner.get(Global.LONGI));
+                a.putExtra(Global.LATI, map_kuliner.get(Global.LATI));
                 startActivity(a);
             }
         });
@@ -125,11 +130,13 @@ public class KotaActivity extends AppCompatActivity {
                         JSONObject js = jsonArray.getJSONObject(0);
                         String judul = js.getString("kota");
                         String isi = js.getString("deskripsi");
-                        String gbr = Global.BASE_IMG+ js.getString("gambar");
+                        String gbr = Global.BASE_IMG + js.getString("gambar");
                         //set data
                         jdl.setText(judul);
                         konten.setText(isi);
-                        imageLoader.DisplayImage(gbr, img);
+//                        imageLoader.DisplayImage(Global.BASE_IMG + js.getString(Global.GAMBAR), img);
+                        Picasso.with(KotaActivity.this).load(gbr).into(img);
+//                        imageLoader.DisplayImage(gbr, img);
                     }catch (JSONException e){
                     }
                 }
@@ -174,12 +181,16 @@ public class KotaActivity extends AppCompatActivity {
                     String id_kota = c.getString("id_kota");
                     String id_wisata = c.getString("id_wisata");
                     String nama_tempat = c.getString("nama_tempat");
+                    String lati = c.getString("langi");
+                    String longi = c.getString("longi");
                     String gbr = Global.GET_IMAGE_WISATA+ c.getString("gambar");
                     HashMap<String,String> map_wisata = new HashMap<>();
                     map_wisata.put(Global.GAMBAR_WISATA,gbr);
                     map_wisata.put(Global.ID_WISATA,id_wisata);
                     map_wisata.put(Global.ID_KOTA,id_kota);
                     map_wisata.put(Global.NAMA_TEMPAT,nama_tempat);
+                    map_wisata.put(Global.LATI,lati);
+                    map_wisata.put(Global.LONGI,longi);
                     DaftarWisata.add(map_wisata);
                 }
             } catch(JSONException e){
@@ -215,12 +226,16 @@ public class KotaActivity extends AppCompatActivity {
                     String id_kota = c.getString("id_kota");
                     String id_wisata = c.getString("id_kuliner");
                     String nama_tempat = c.getString("nama_tempat");
+                    String lati = c.getString("langi");
+                    String longi = c.getString("longi");
                     String gbr = Global.GET_IMAGE_KULINER+ c.getString("gambar");
                     HashMap<String,String> map_kuliner = new HashMap<>();
                     map_kuliner.put(Global.GAMBAR_KULINER,gbr);
                     map_kuliner.put(Global.ID_KULINER,id_wisata);
                     map_kuliner.put(Global.ID_KOTA,id_kota);
                     map_kuliner.put(Global.NAMA_TEMPAT,nama_tempat);
+                    map_kuliner.put(Global.LATI,lati);
+                    map_kuliner.put(Global.LONGI,longi);
                     DaftarKuliner.add(map_kuliner);
                 }
             } catch(JSONException e){

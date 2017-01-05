@@ -9,9 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.setditjenp2mkt.apputs.KotaActivity;
 import com.example.setditjenp2mkt.apputs.R;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +68,7 @@ public class WisataAdapter extends BaseAdapter {
 
         id_wisata.setText(daftar_wisata.get(Global.ID_WISATA));
         txtTitle.setText(daftar_wisata.get(Global.NAMA_TEMPAT));
-        imageLoader.DisplayImage(daftar_wisata.get(Global.GAMBAR_WISATA),imageView);
+        Picasso.with(WisataAdapter.inflater.getContext()).load(daftar_wisata.get(Global.GAMBAR_WISATA)).into(imageView);
         return rowView;
     }
 
