@@ -13,9 +13,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.setditjenp2mkt.apputs.helpers.SQLiteHandler;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+import com.example.setditjenp2mkt.apputs.utils.SessionManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -46,7 +48,8 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
     private boolean mapReady=false;
     private GoogleMap mMap;
     JSONArray jsonArray = null;
-
+    private SQLiteHandler db;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

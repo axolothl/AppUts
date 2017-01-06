@@ -21,6 +21,9 @@ public class Global {
     public static final String URL_LOGIN = BASE_URL+"Welcome/login_endpoint";
     public static final String URL_REGISTER = BASE_URL+"Welcome/registration_endpoint";
 
+    public static final String SUBMIT_KOMENTAR_WISATA = BASE_URL+"Welcome/submit_feedback_tw";
+    public static final String LOAD_KOMENTAR_WISATA = BASE_URL+"Welcome/comment_wisata";
+
 
 //    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";
 //    public static final String BASE_IMG="http://192.168.32.57/pantura/img_kota/";
@@ -52,6 +55,9 @@ public class Global {
     public static final String NAMA_TEMPAT = "nama_tempat";
     public static final String GAMBAR_WISATA = "gambar";
     public static final String GAMBAR_KULINER = "gambar";
+    public static final String FEEDBACK = "feedback";
+    public static final String ID_USER = "id_user";
+    public static final String NAMA = "nama";
 
 }
 

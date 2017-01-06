@@ -25,14 +25,12 @@ public class KulinerAdapter extends BaseAdapter {
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
-    public ImageLoader imageLoader;
 
     public KulinerAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
         data = d;
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageLoader = new ImageLoader(activity.getApplicationContext());
     }
 
     @Override

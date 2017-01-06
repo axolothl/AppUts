@@ -19,9 +19,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.setditjenp2mkt.apputs.adapter.CommentAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.KulinerAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.WisataAdapter;
@@ -49,13 +51,10 @@ public class KotaActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> DaftarWisata = new ArrayList<HashMap<String, String>>();
     WisataAdapter wisataAdapter;
     KulinerAdapter kulinerAdapter;
+    CommentAdapter commentAdapter;
 
-    ImageLoader imageLoader;
-    {
-        imageLoader = new ImageLoader(null);
-    }
-
-    ListView wisata, makanan;
+    TextView empty_wisata, empty_kuliner;
+    ListView wisata, makanan, komentar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +64,15 @@ public class KotaActivity extends AppCompatActivity {
         id = getIntent().getStringExtra(Global.ID);
         new detailKota().execute();
 
+        empty_wisata = (TextView)findViewById(R.id.emptytext);
+        empty_kuliner = (TextView)findViewById(R.id.emptytext1);
+
         DaftarWisata = new ArrayList<HashMap<String, String>>();
         DaftarKuliner = new ArrayList<HashMap<String, String>>();
 
-        new tampilWisata().execute();
-        new tampilKuliner().execute();
-
         wisata = (ListView)findViewById(R.id.wisata_aceh);
+        wisata.setEmptyView(empty_wisata);
+        new tampilWisata().execute();
 
         wisata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -89,6 +90,8 @@ public class KotaActivity extends AppCompatActivity {
         });
 
         makanan = (ListView)findViewById(R.id.kuliner_aceh);
+        makanan.setEmptyView(empty_kuliner);
+        new tampilKuliner().execute();
 
         makanan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -104,6 +107,7 @@ public class KotaActivity extends AppCompatActivity {
                 startActivity(a);
             }
         });
+
     }
 
     private class detailKota extends AsyncTask<String,String,String>{
@@ -134,9 +138,7 @@ public class KotaActivity extends AppCompatActivity {
                         //set data
                         jdl.setText(judul);
                         konten.setText(isi);
-//                        imageLoader.DisplayImage(Global.BASE_IMG + js.getString(Global.GAMBAR), img);
                         Picasso.with(KotaActivity.this).load(gbr).into(img);
-//                        imageLoader.DisplayImage(gbr, img);
                     }catch (JSONException e){
                     }
                 }
@@ -258,15 +260,27 @@ public class KotaActivity extends AppCompatActivity {
     }
 
     private void SetListWisata(ArrayList<HashMap<String, String>> daftarWisata) {
-        wisataAdapter = new WisataAdapter(this, daftarWisata);
+        if(daftarWisata.size() == 0) {
+            wisataAdapter = new WisataAdapter(this, new ArrayList<HashMap<String, String>>());
+            empty_wisata.setText("Tidak ada tempat wisata");
+            wisataAdapter.notifyDataSetInvalidated();
+        } else {
+            wisataAdapter = new WisataAdapter(this, daftarWisata);
+            wisataAdapter.notifyDataSetChanged();
+        }
         wisata.setAdapter(wisataAdapter);
-        wisataAdapter.notifyDataSetChanged();
     }
 
-    private void SetListKuliner(ArrayList<HashMap<String, String>> daftarWisata) {
-        kulinerAdapter = new KulinerAdapter(this, daftarWisata);
+    private void SetListKuliner(ArrayList<HashMap<String, String>> daftarKuliner) {
+        if(daftarKuliner.size() == 0) {
+            kulinerAdapter = new KulinerAdapter(this, new ArrayList<HashMap<String, String>>());
+            empty_kuliner.setText("Tidak ada tempat wisata");
+            kulinerAdapter.notifyDataSetInvalidated();
+        } else {
+            kulinerAdapter = new KulinerAdapter(this, daftarKuliner);
+            kulinerAdapter.notifyDataSetChanged();
+        }
         makanan.setAdapter(kulinerAdapter);
-        kulinerAdapter.notifyDataSetChanged();
     }
 
 
