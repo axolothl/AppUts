@@ -98,7 +98,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         submit = (Button)findViewById(R.id.submit);
 
         HashMap<String, String> user = db.getUserDetails();
-        final String id_user = user.get("uid");
+        final String id_user = user.get("id_user");
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +137,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                         String id_wisata = c.getString("id_wisata");
                         String feedback = c.getString("feedback");
                         String id_user = c.getString("id_user");
-                        String nama = c.getString("nama");
+                        String nama = c.getString("name");
                         HashMap<String,String> map_komen = new HashMap<>();
                         map_komen.put(Global.ID_WISATA,id_wisata);
                         map_komen.put(Global.ID_KOTA,id_kota);
@@ -145,10 +145,8 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                         map_komen.put(Global.ID_USER,id_user);
                         map_komen.put(Global.NAMA,nama);
                         DaftarKomen.add(map_komen);
-                        SetListComment(DaftarKomen);
                     }
-
-                    // response
+                    SetListComment(DaftarKomen);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -174,7 +172,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void submitKomentar(final String id_kota, final String id_wisata, final String id_user, final String feedback){ //kurang komentar
+    private void submitKomentar(final String id_kota, final String id_wisata, final String id_user, final String feedback){
         String tag_string_req = "req_submit_komentar";
         pDialog.setMessage("Posting ...");
         showDialog();
@@ -189,7 +187,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                     JSONObject jsonObject = new JSONObject(response);
                     boolean error = jsonObject.getBoolean("error");
                     if (!error) {
-                        Toast.makeText(getApplicationContext(), "Komentar berhasil disiarkan", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Komentar berhasil ditambahkan", Toast.LENGTH_LONG).show();
                         loadKomentar(id_kota,id_wisata);
                     } else {
                         String errorMsg = jsonObject.getString("error_msg");
@@ -309,7 +307,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
     private void SetListComment(ArrayList<HashMap<String, String>> daftarKomen) {
         if(daftarKomen.size() == 0) {
             commentAdapter = new CommentAdapter(this, new ArrayList<HashMap<String, String>>());
-            emptyTV.setText("Tidak ada comment");
+            emptyTV.setText("Tidak ada komentar");
             commentAdapter.notifyDataSetInvalidated();
         } else {
             commentAdapter = new CommentAdapter(this, daftarKomen);
