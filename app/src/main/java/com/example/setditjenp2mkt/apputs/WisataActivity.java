@@ -76,7 +76,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         DaftarKomen = new ArrayList<HashMap<String, String>>();
 
         detailWisata(id,id_wisata);
-//        loadKomentar(id,id_wisata);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_wisata);
         mapFragment.getMapAsync(WisataActivity.this);
@@ -99,15 +98,96 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
             public void onClick(View v) {
                 if (komen.getText().toString() != "") {
                     submitKomentar(id, id_wisata, id_user, komen.getText().toString());
-                    loadKomentar(id,id_wisata);
                 } else {
                     Toast.makeText(getApplicationContext(), "Lengkapi field", Toast.LENGTH_SHORT).show();
                 }
+                Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
+                reOpen.putExtra(Global.ID, id);
+                reOpen.putExtra(Global.ID_WISATA, id_wisata);
+                reOpen.putExtra(Global.LONGI, String.valueOf(longi));
+                reOpen.putExtra(Global.LATI, String.valueOf(lati));
+                startActivity(reOpen);
+                //finish();
+                overridePendingTransition( 0, 0);
+                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
                 komen_check = true;
                 komen.setText("");
             }
         });
 
+    }
+
+    public void onDelete_click(View view) {
+        final int position = (Integer) view.getTag();
+        HashMap<String,String> map = DaftarKomen.get(position);
+        String id_feedback_tw = map.get(Global.ID_FEEDBACK_TW);
+        String id_kota = map.get(Global.ID_KOTA);
+        String id_user = map.get(Global.ID_USER);
+        String id_wisata = map.get(Global.ID_WISATA);
+        deleteKomentar(id_kota,id_wisata,id_user,id_feedback_tw);
+        Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
+        reOpen.putExtra(Global.ID, id);
+        reOpen.putExtra(Global.ID_WISATA, id_wisata);
+        reOpen.putExtra(Global.LONGI, String.valueOf(longi));
+        reOpen.putExtra(Global.LATI, String.valueOf(lati));
+        startActivity(reOpen);
+        //finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+        Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteKomentar(final String id_kota, final String id_wisata, final String id_user, final String id_feedback_tw){
+        String tag_string_req = "req_delete_komentar";
+        pDialog.setMessage("Deleting Comment ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DELETE_KOMENTAR_WISATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Comment Delete Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(), "Komentar berhasil dihapus", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                loadKomentar(id_kota,id_wisata);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Comment Delete Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                params.put("id_wisata", id_wisata);
+                params.put("id_user", id_user);
+                params.put("id_feedback_tw", id_feedback_tw);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void loadKomentar(final String id_kota, final String id_wisata){
@@ -128,12 +208,14 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                         String feedback = c.getString("feedback");
                         String id_user = c.getString("id_user");
                         String nama = c.getString("name");
+                        String id_feedback_tw = c.getString("id_feedback_tw");
                         HashMap<String,String> map_komen = new HashMap<>();
                         map_komen.put(Global.ID_WISATA,id_wisata);
                         map_komen.put(Global.ID_KOTA,id_kota);
                         map_komen.put(Global.FEEDBACK,feedback);
                         map_komen.put(Global.ID_USER,id_user);
                         map_komen.put(Global.NAMA,nama);
+                        map_komen.put(Global.ID_FEEDBACK_TW,id_feedback_tw);
                         DaftarKomen.add(map_komen);
                     }
                 } catch (JSONException e) {
@@ -186,7 +268,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                loadKomentar(id_kota,id_wisata);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -309,5 +390,12 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(WisataActivity.this, KotaActivity.class);
+        intent.putExtra(Global.ID, id);
+        startActivity(intent);
+        return;
+    }
 
 }

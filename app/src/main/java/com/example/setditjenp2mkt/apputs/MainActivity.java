@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     static final int tampil_error=1;
     public String lo_Koneksi,isi ;
 
-    ImageView header;
     ListView list;
 
     @Override

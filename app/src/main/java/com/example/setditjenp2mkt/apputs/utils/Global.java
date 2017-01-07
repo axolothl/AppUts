@@ -26,6 +26,12 @@ public class Global {
     public static final String SUBMIT_KOMENTAR_KULINER = BASE_URL+"Welcome/submit_feedback_tk";
     public static final String LOAD_KOMENTAR_KULINER = BASE_URL+"Welcome/comment_kuliner";
 
+    public static final String DELETE_KOMENTAR_WISATA = BASE_URL+"Welcome/delete_comment_wisata_data";
+    public static final String DELETE_KOMENTAR_KULINER = BASE_URL+"Welcome/delete_comment_kuliner_data";
+
+    public static final String EDIT_DATA_KOTA = BASE_URL+"Welcome/edit_data_kota";
+    public static final String EDIT_DATA_WISATA = BASE_URL+"Welcome/edit_data_wisata";
+    public static final String EDIT_DATA_KULINER = BASE_URL+"Welcome/edit_data_kuliner";
 
 //    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";
 //    public static final String BASE_IMG="http://192.168.32.57/pantura/img_kota/";
@@ -60,6 +66,8 @@ public class Global {
     public static final String FEEDBACK = "feedback";
     public static final String ID_USER = "id_user";
     public static final String NAMA = "nama";
+    public static final String ID_FEEDBACK_TW = "id_feedback_tw";
+    public static final String ID_FEEDBACK_TK = "id_feedback_tk";
 
 }
 

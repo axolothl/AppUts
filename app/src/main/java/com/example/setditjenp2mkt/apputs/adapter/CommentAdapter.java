@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.setditjenp2mkt.apputs.R;
+import com.example.setditjenp2mkt.apputs.helpers.SQLiteHandler;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageNicer;
 import com.squareup.picasso.Picasso;
@@ -25,6 +26,7 @@ public class CommentAdapter extends BaseAdapter {
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
+    private SQLiteHandler db;
 
     public CommentAdapter(Activity a, ArrayList<HashMap<String, String>> d){
         activity = a;
@@ -54,7 +56,8 @@ public class CommentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        ViewHolderItem viewHolder;
+        ViewHolderItem viewHolder;
+
         View rowView = convertView;
         if (convertView == null)
             rowView = inflater.inflate(R.layout.layout_listdesc, null, true);
@@ -65,9 +68,22 @@ public class CommentAdapter extends BaseAdapter {
         HashMap<String, String> daftar_comment = new HashMap<String, String>();
         daftar_comment = data.get(position);
 
-//        viewHolder = new ViewHolderItem();
-//        viewHolder.deletecomment = (TextView) rowView.findViewById(R.id.deletecomment);
-//        viewHolder.deletecomment.setTag(position_v);
+        db = new SQLiteHandler(CommentAdapter.inflater.getContext());
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("id_user");
+
+        final String id_user = daftar_comment.get(Global.ID_USER);
+
+        if(id_user.equals(id_user_sqlite)) {
+            viewHolder = new ViewHolderItem();
+            viewHolder.deletecomment = (TextView) rowView.findViewById(R.id.deletecomment);
+            viewHolder.deletecomment.setVisibility(View.VISIBLE);
+            viewHolder.deletecomment.setTag(position);
+        } else {
+            viewHolder = new ViewHolderItem();
+            viewHolder.deletecomment = (TextView) rowView.findViewById(R.id.deletecomment);
+            viewHolder.deletecomment.setVisibility(View.GONE);
+        }
 
         txtTitle.setText(daftar_comment.get(Global.NAMA));
         Picasso.with(CommentAdapter.inflater.getContext()).load(R.drawable.user).into(imageView);

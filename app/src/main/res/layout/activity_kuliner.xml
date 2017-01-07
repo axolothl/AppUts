@@ -103,6 +103,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/submit" />
+
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map_kuliner"
                 android:name="com.google.android.gms.maps.MapFragment"

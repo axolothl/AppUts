@@ -32,6 +32,22 @@
             android:textSize="17sp"
             android:layout_marginLeft="12dp"/>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Hapus"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:id="@+id/deletecomment"
+                android:onClick="onDelete_click"
+                android:layout_weight="1" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +58,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView1"
             android:layout_toEndOf="@+id/textView1" />
+
 
     </LinearLayout>
 </LinearLayout>

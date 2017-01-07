@@ -1,6 +1,7 @@
 package com.example.setditjenp2mkt.apputs;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -80,7 +81,6 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         DaftarKomen = new ArrayList<HashMap<String, String>>();
 
         detailKuliner(id,id_kuliner);
-        loadKomentar(id,id_kuliner);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_kuliner);
         mapFragment.getMapAsync(KulinerActivity.this);
@@ -106,15 +106,93 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                 } else {
                     Toast.makeText(getApplicationContext(), "Lengkapi field", Toast.LENGTH_SHORT).show();
                 }
+                Intent reOpen = new Intent (KulinerActivity.this, KulinerActivity.class);
+                reOpen.putExtra(Global.ID, id);
+                reOpen.putExtra(Global.ID_KULINER, id_kuliner);
+                reOpen.putExtra(Global.LONGI, String.valueOf(longi));
+                reOpen.putExtra(Global.LATI, String.valueOf(lati));
+                startActivity(reOpen);
+                //finish();
+                overridePendingTransition( 0, 0);
+                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
                 komen_check = true;
-//                Intent reOpen = new Intent(WisataActivity.this, WisataActivity.class);
-//                startActivity(reOpen);
-//                overridePendingTransition(0, 0);
-//                startActivity(getIntent());
-//                overridePendingTransition(0, 0);
-                UIUtils.setListViewHeightBasedOnItems(komentar);
+                komen.setText("");
+
             }
         });
+    }
+
+    public void onDelete_click(View view) {
+        final int position = (Integer) view.getTag();
+        HashMap<String,String> map = DaftarKomen.get(position);
+        String id_feedback_tk = map.get(Global.ID_FEEDBACK_TK);
+        String id_kota = map.get(Global.ID_KOTA);
+        String id_user = map.get(Global.ID_USER);
+        String id_kuliner = map.get(Global.ID_KULINER);
+        deleteKomentar(id_kota,id_kuliner,id_user,id_feedback_tk);
+        Intent reOpen = new Intent (KulinerActivity.this, KulinerActivity.class);
+        reOpen.putExtra(Global.ID, id);
+        reOpen.putExtra(Global.ID_KULINER, id_kuliner);
+        reOpen.putExtra(Global.LONGI, String.valueOf(longi));
+        reOpen.putExtra(Global.LATI, String.valueOf(lati));
+        startActivity(reOpen);
+        //finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+        Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteKomentar(final String id_kota, final String id_kuliner, final String id_user, final String id_feedback_tk){
+        String tag_string_req = "req_delete_komentar";
+        progressDialog.setMessage("Deleting Comment ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DELETE_KOMENTAR_KULINER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Comment Delete Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(), "Komentar berhasil dihapus", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                loadKomentar(id_kota,id_wisata);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Comment Delete Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                params.put("id_kuliner", id_kuliner);
+                params.put("id_user", id_user);
+                params.put("id_feedback_tk", id_feedback_tk);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void loadKomentar(final String id_kota, final String id_kuliner){
@@ -135,12 +213,14 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                         String feedback = c.getString("feedback");
                         String id_user = c.getString("id_user");
                         String nama = c.getString("name");
+                        String id_feedback_tk = c.getString("id_feedback_tk");
                         HashMap<String,String> map_komen = new HashMap<>();
                         map_komen.put(Global.ID_WISATA,id_kuliner);
                         map_komen.put(Global.ID_KOTA,id_kota);
                         map_komen.put(Global.FEEDBACK,feedback);
                         map_komen.put(Global.ID_USER,id_user);
                         map_komen.put(Global.NAMA,nama);
+                        map_komen.put(Global.ID_FEEDBACK_TK,id_feedback_tk);
                         DaftarKomen.add(map_komen);
                     }
                     SetListComment(DaftarKomen);
@@ -310,11 +390,22 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         if(daftarKomen.size() == 0) {
             commentAdapter = new CommentAdapter(this, new ArrayList<HashMap<String, String>>());
             emptyTV.setText("Tidak ada komentar");
+            komentar.setAdapter(commentAdapter);
             commentAdapter.notifyDataSetInvalidated();
         } else {
             commentAdapter = new CommentAdapter(this, daftarKomen);
+            komentar.setAdapter(commentAdapter);
+            UIUtils.setListViewHeightBasedOnItems(komentar);
             commentAdapter.notifyDataSetChanged();
         }
-        komentar.setAdapter(commentAdapter);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(KulinerActivity.this, KotaActivity.class);
+        intent.putExtra(Global.ID, id);
+        startActivity(intent);
+        return;
     }
 }
