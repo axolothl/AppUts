@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent a = new Intent(getApplicationContext(),KotaActivity.class);
                 a.putExtra(Global.ID, map.get(Global.ID));
                 startActivity(a);
+                finish();
             }
         });
     }
@@ -171,6 +172,12 @@ public class MainActivity extends AppCompatActivity {
             String isi = "http://mobcompfinal.pe.hu/";
             return isi;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        return;
     }
 
 }

@@ -406,6 +406,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         Intent intent = new Intent(KulinerActivity.this, KotaActivity.class);
         intent.putExtra(Global.ID, id);
         startActivity(intent);
+        finish();
         return;
     }
 }

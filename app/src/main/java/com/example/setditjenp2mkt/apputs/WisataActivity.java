@@ -395,6 +395,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         Intent intent = new Intent(WisataActivity.this, KotaActivity.class);
         intent.putExtra(Global.ID, id);
         startActivity(intent);
+        finish();
         return;
     }
 

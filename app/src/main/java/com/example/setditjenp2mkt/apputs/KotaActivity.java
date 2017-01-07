@@ -287,6 +287,7 @@ public class KotaActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(KotaActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
         return;
     }
 
