@@ -283,5 +283,12 @@ public class KotaActivity extends AppCompatActivity {
         makanan.setAdapter(kulinerAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(KotaActivity.this, MainActivity.class);
+        startActivity(intent);
+        return;
+    }
+
 
 }
