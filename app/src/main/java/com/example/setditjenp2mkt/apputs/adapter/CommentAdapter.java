@@ -70,11 +70,8 @@ public class CommentAdapter extends BaseAdapter {
 //        viewHolder.deletecomment.setTag(position_v);
 
         txtTitle.setText(daftar_comment.get(Global.NAMA));
-//        imageView.setImageBitmap(ImageNicer.decodeSampledBitmapFromResource(context.getResources(), imgid.get(position_v), 100, 100));
         Picasso.with(CommentAdapter.inflater.getContext()).load(R.drawable.user).into(imageView);
         extratxt.setText(daftar_comment.get(Global.FEEDBACK));
-
-//        Picasso.with(KulinerAdapter.inflater.getContext()).load(daftar_kuliner.get(Global.GAMBAR_KULINER)).into(imageView);
         return rowView;
     }
 }

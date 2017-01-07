@@ -76,7 +76,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         DaftarKomen = new ArrayList<HashMap<String, String>>();
 
         detailWisata(id,id_wisata);
-        loadKomentar(id,id_wisata);
+//        loadKomentar(id,id_wisata);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_wisata);
         mapFragment.getMapAsync(WisataActivity.this);
@@ -99,16 +99,12 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
             public void onClick(View v) {
                 if (komen.getText().toString() != "") {
                     submitKomentar(id, id_wisata, id_user, komen.getText().toString());
+                    loadKomentar(id,id_wisata);
                 } else {
                     Toast.makeText(getApplicationContext(), "Lengkapi field", Toast.LENGTH_SHORT).show();
                 }
                 komen_check = true;
-//                Intent reOpen = new Intent(WisataActivity.this, WisataActivity.class);
-//                startActivity(reOpen);
-//                overridePendingTransition(0, 0);
-//                startActivity(getIntent());
-//                overridePendingTransition(0, 0);
-                UIUtils.setListViewHeightBasedOnItems(komentar);
+                komen.setText("");
             }
         });
 
@@ -140,10 +136,10 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                         map_komen.put(Global.NAMA,nama);
                         DaftarKomen.add(map_komen);
                     }
-                    SetListComment(DaftarKomen);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                SetListComment(DaftarKomen);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -182,7 +178,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                     boolean error = jsonObject.getBoolean("error");
                     if (!error) {
                         Toast.makeText(getApplicationContext(), "Komentar berhasil ditambahkan", Toast.LENGTH_LONG).show();
-                        loadKomentar(id_kota,id_wisata);
                     } else {
                         String errorMsg = jsonObject.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
@@ -191,6 +186,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+//                loadKomentar(id_kota,id_wisata);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -250,7 +246,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
+                loadKomentar(id_kota,id_wisata);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -302,12 +298,15 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         if(daftarKomen.size() == 0) {
             commentAdapter = new CommentAdapter(this, new ArrayList<HashMap<String, String>>());
             emptyTV.setText("Tidak ada komentar");
+            komentar.setAdapter(commentAdapter);
             commentAdapter.notifyDataSetInvalidated();
         } else {
             commentAdapter = new CommentAdapter(this, daftarKomen);
+            komentar.setAdapter(commentAdapter);
+            UIUtils.setListViewHeightBasedOnItems(komentar);
             commentAdapter.notifyDataSetChanged();
         }
-        komentar.setAdapter(commentAdapter);
+
     }
 
 
