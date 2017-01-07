@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        header = (ImageView)findViewById(R.id.imageView7);
         list = (ListView)findViewById(R.id.list);
         DaftarKota = new ArrayList<>();
         if (cekStatus(this)){
