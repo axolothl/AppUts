@@ -23,6 +23,8 @@ public class Global {
 
     public static final String SUBMIT_KOMENTAR_WISATA = BASE_URL+"Welcome/submit_feedback_tw";
     public static final String LOAD_KOMENTAR_WISATA = BASE_URL+"Welcome/comment_wisata";
+    public static final String SUBMIT_KOMENTAR_KULINER = BASE_URL+"Welcome/submit_feedback_tk";
+    public static final String LOAD_KOMENTAR_KULINER = BASE_URL+"Welcome/comment_kuliner";
 
 
 //    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";

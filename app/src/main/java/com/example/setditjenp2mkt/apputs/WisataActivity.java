@@ -88,12 +88,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
 
         db = new SQLiteHandler(getApplicationContext());
 
-        session = new SessionManager(getApplicationContext());
-
-//        if (!session.isLoggedIn()) {
-//            logoutUser();
-//        }
-
         komen = (EditText)findViewById(R.id.editKomentar);
         submit = (Button)findViewById(R.id.submit);
 

@@ -59,7 +59,7 @@ public class CommentAdapter extends BaseAdapter {
         if (convertView == null)
             rowView = inflater.inflate(R.layout.layout_listdesc, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-//        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         HashMap<String, String> daftar_comment = new HashMap<String, String>();
@@ -71,7 +71,7 @@ public class CommentAdapter extends BaseAdapter {
 
         txtTitle.setText(daftar_comment.get(Global.NAMA));
 //        imageView.setImageBitmap(ImageNicer.decodeSampledBitmapFromResource(context.getResources(), imgid.get(position_v), 100, 100));
-//        Picasso.with(CommentAdapter.inflater.getContext()).load(daftar_comment.get(Global.GAMBAR_KULINER)).into(imageView);
+        Picasso.with(CommentAdapter.inflater.getContext()).load(R.drawable.user).into(imageView);
         extratxt.setText(daftar_comment.get(Global.FEEDBACK));
 
 //        Picasso.with(KulinerAdapter.inflater.getContext()).load(daftar_kuliner.get(Global.GAMBAR_KULINER)).into(imageView);
