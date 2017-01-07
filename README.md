@@ -1,9 +1,7 @@
-# Pantura
-Progress Report:
-- Collaborating 1st design and functionality
-- Building Database Function For All Static Adapter
-- On Branch Master: Fixing Feedback (Comment & Like) in Static Adapter
-- On Branch phase-2-2: Design Improvement
-- Web Service progress: https://bitbucket.org/gregoriusandito/pantura
+# Pantura (Panduan Wisata Nusantara)
+Created by:
+- Mikael Yurubeli (UI, UX Designer & Front-End Developer)
+- Muhammad Fakhri Ali Ibrahim (Back-End/Core System Designer & Developer) 
+- Gregorius Andito Herjuno (Database Designer & Developer)
 
 
