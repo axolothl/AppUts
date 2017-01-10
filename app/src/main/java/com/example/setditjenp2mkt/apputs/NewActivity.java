@@ -54,6 +54,9 @@ public class NewActivity extends AppCompatActivity {
         id = getIntent().getStringExtra(Global.ID);
         s_add_code = getIntent().getStringExtra(Global.ADD_CODE);
 
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+
         namaTempat = (EditText)findViewById(R.id.inputNamaTempat);
         deskripsiTempat = (EditText)findViewById(R.id.editdeskripsi);
         mapLatitude =(EditText) findViewById(R.id.inputMapLatitude);
@@ -88,8 +91,11 @@ public class NewActivity extends AppCompatActivity {
                 overridePendingTransition( 0, 0);
                 startActivity(getIntent());
                 overridePendingTransition( 0, 0);
-                Toast.makeText(getApplicationContext(), "Kota Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
-
+                if(s_add_code.equals("wisata")){
+                    Toast.makeText(getApplicationContext(), "Tempat Wisata Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
+                } else if(s_add_code.equals("kuliner")){
+                    Toast.makeText(getApplicationContext(), "Tempat Kuliner Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
