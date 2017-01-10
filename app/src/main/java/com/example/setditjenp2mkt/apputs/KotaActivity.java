@@ -13,6 +13,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -27,6 +30,7 @@ import com.example.setditjenp2mkt.apputs.adapter.CommentAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.KulinerAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.WisataAdapter;
+import com.example.setditjenp2mkt.apputs.helpers.SQLiteHandler;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
@@ -51,10 +55,11 @@ public class KotaActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> DaftarWisata = new ArrayList<HashMap<String, String>>();
     WisataAdapter wisataAdapter;
     KulinerAdapter kulinerAdapter;
-    CommentAdapter commentAdapter;
+    private SQLiteHandler db;
+    private ProgressBar progressBarW, progressBarK;
 
     TextView empty_wisata, empty_kuliner;
-    ListView wisata, makanan, komentar;
+    ListView wisata, makanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,13 @@ public class KotaActivity extends AppCompatActivity {
 
         wisata = (ListView)findViewById(R.id.wisata_aceh);
         wisata.setEmptyView(empty_wisata);
+
+        progressBarW = (ProgressBar)findViewById(R.id.progressBarW);
+        progressBarK = (ProgressBar)findViewById(R.id.progressBarK);
+
         new tampilWisata().execute();
+
+
 
         wisata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -168,6 +179,7 @@ public class KotaActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBarW.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -208,6 +220,7 @@ public class KotaActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     SetListWisata(DaftarWisata);
+                    progressBarW.setVisibility(View.GONE);
                 }
             });
         }
@@ -253,10 +266,16 @@ public class KotaActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     SetListKuliner(DaftarKuliner);
+                    progressBarW.setVisibility(View.GONE);
                 }
             });
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBarW.setVisibility(View.VISIBLE);
+        }
     }
 
     private void SetListWisata(ArrayList<HashMap<String, String>> daftarWisata) {
@@ -291,5 +310,38 @@ public class KotaActivity extends AppCompatActivity {
         return;
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        db = new SQLiteHandler(KotaActivity.this);
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("email");
+        if (id_user_sqlite.matches("admin")){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_edit_kota, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.edit_deskripsi:
+                Intent intent = new Intent(KotaActivity.this, EditActivity.class);
+                intent.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(intent);
+                return true;
+            case R.id.edit_wisata:
+                Intent intent1 = new Intent(KotaActivity.this, EditActivity.class);
+                intent1.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(intent1);
+                return true;
+            case R.id.edit_kuliner:
+                Intent intent2 = new Intent(KotaActivity.this, EditActivity.class);
+                intent2.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

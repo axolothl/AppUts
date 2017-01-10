@@ -12,6 +12,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,9 +22,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.setditjenp2mkt.apputs.adapter.CommentAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
+import com.example.setditjenp2mkt.apputs.helpers.SQLiteHandler;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+import com.example.setditjenp2mkt.apputs.utils.SessionManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,13 +50,17 @@ public class MainActivity extends AppCompatActivity {
     ListAdapter listAdapter;
     static final int tampil_error=1;
     public String lo_Koneksi,isi ;
-
+    private SQLiteHandler db;
+    private SessionManager session;
     ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new SQLiteHandler(getApplicationContext());
+        session = new SessionManager(getApplicationContext());
 
         list = (ListView)findViewById(R.id.list);
         DaftarKota = new ArrayList<>();
@@ -178,6 +188,47 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         return;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        db = new SQLiteHandler(MainActivity.this);
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("email");
+        if (id_user_sqlite.matches("admin")){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_utama_admin, menu);
+        } else {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_utama, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.add:
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.logout:
+                logoutUser();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    private void logoutUser() {
+        session.setLogin(false);
+
+        db.deleteUsers();
+
+        // Launching the login activity
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

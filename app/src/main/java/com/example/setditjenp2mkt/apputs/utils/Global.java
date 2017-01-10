@@ -33,6 +33,8 @@ public class Global {
     public static final String EDIT_DATA_WISATA = BASE_URL+"Welcome/edit_data_wisata";
     public static final String EDIT_DATA_KULINER = BASE_URL+"Welcome/edit_data_kuliner";
 
+    public static final String INPUT_DATA_KOTA = BASE_URL+"Welcome/submit_data_kota";
+
 //    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";
 //    public static final String BASE_IMG="http://192.168.32.57/pantura/img_kota/";
 //

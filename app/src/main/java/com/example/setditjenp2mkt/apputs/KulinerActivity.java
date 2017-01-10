@@ -112,7 +112,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                 reOpen.putExtra(Global.LONGI, String.valueOf(longi));
                 reOpen.putExtra(Global.LATI, String.valueOf(lati));
                 startActivity(reOpen);
-                //finish();
+                finish();
                 overridePendingTransition( 0, 0);
                 startActivity(getIntent());
                 overridePendingTransition( 0, 0);
@@ -137,7 +137,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         reOpen.putExtra(Global.LONGI, String.valueOf(longi));
         reOpen.putExtra(Global.LATI, String.valueOf(lati));
         startActivity(reOpen);
-        //finish();
+        finish();
         overridePendingTransition( 0, 0);
         startActivity(getIntent());
         overridePendingTransition( 0, 0);

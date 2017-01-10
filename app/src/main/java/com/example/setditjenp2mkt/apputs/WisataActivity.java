@@ -107,12 +107,13 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                 reOpen.putExtra(Global.LONGI, String.valueOf(longi));
                 reOpen.putExtra(Global.LATI, String.valueOf(lati));
                 startActivity(reOpen);
-                //finish();
+                finish();
                 overridePendingTransition( 0, 0);
                 startActivity(getIntent());
                 overridePendingTransition( 0, 0);
                 komen_check = true;
                 komen.setText("");
+                finish();
             }
         });
 
@@ -132,7 +133,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         reOpen.putExtra(Global.LONGI, String.valueOf(longi));
         reOpen.putExtra(Global.LATI, String.valueOf(lati));
         startActivity(reOpen);
-        //finish();
+        finish();
         overridePendingTransition( 0, 0);
         startActivity(getIntent());
         overridePendingTransition( 0, 0);
