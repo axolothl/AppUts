@@ -47,7 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class KotaActivity extends AppCompatActivity {
-    String id;
+    String id, add_code;
     private JSONParser jsonParser = new JSONParser();
     private ProgressDialog progressDialog;
     JSONArray jsonArray = null;
@@ -331,15 +331,17 @@ public class KotaActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.edit_wisata:
-                Intent intent1 = new Intent(KotaActivity.this, EditActivity.class);
-                intent1.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
-                startActivity(intent1);
+                Intent w = new Intent(KotaActivity.this, NewActivity.class);
+                w.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                w.putExtra(Global.ADD_CODE, "wisata");
+                startActivity(w);
                 finish();
                 return true;
             case R.id.edit_kuliner:
-                Intent intent2 = new Intent(KotaActivity.this, EditActivity.class);
-                intent2.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
-                startActivity(intent2);
+                Intent k = new Intent(KotaActivity.this, NewActivity.class);
+                k.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                k.putExtra(Global.ADD_CODE, "kuliner");
+                startActivity(k);
                 finish();
                 return true;
             default:

@@ -34,23 +34,8 @@ public class Global {
     public static final String EDIT_DATA_KULINER = BASE_URL+"Welcome/edit_data_kuliner";
 
     public static final String INPUT_DATA_KOTA = BASE_URL+"Welcome/submit_data_kota";
-
-//    public static final String BASE_URL="http://192.168.32.57/pantura/Welcome/";
-//    public static final String BASE_IMG="http://192.168.32.57/pantura/img_kota/";
-//
-//    public static final String URL_LOGIN = BASE_URL+"login_endpoint";
-//    public static final String URL_REGISTER = BASE_URL+"registration_endpoint";
-//
-//    public static final String GET_KOTA=BASE_URL+"get_kota";
-//    public static final String DETAIL_KOTA=BASE_URL+"detail_kota";
-//
-//    public static final String GET_IMAGE_WISATA=BASE_URL+"img_wisata/";
-//    public static final String GET_WISATA=BASE_URL+"get_wisata";
-//    public static final String DETAIL_WISATA=BASE_URL+"detail_wisata";
-//
-//    public static final String GET_IMAGE_KULINER=BASE_URL+"img_kuliner/";
-//    public static final String GET_KULINER=BASE_URL+"get_kuliner";
-//    public static final String DETAIL_KULINER=BASE_URL+"detail_kuliner";
+    public static final String INPUT_DATA_WISATA = BASE_URL+"Welcome/submit_data_wisata";
+    public static final String INPUT_DATA_KULINER = BASE_URL+"Welcome/submit_data_kuliner";
 
     //global variable
     public static final String ID = "id";
@@ -70,6 +55,6 @@ public class Global {
     public static final String NAMA = "nama";
     public static final String ID_FEEDBACK_TW = "id_feedback_tw";
     public static final String ID_FEEDBACK_TK = "id_feedback_tk";
-
+    public static final String ADD_CODE = "code";
 }
 

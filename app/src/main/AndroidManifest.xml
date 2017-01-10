@@ -49,7 +49,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".AddActivity" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+        <activity android:name=".NewActivity"></activity>
     </application>
 
 </manifest>
