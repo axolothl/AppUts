@@ -2,6 +2,7 @@ package com.example.setditjenp2mkt.apputs;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +19,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.setditjenp2mkt.apputs.utils.Global;
+import com.example.setditjenp2mkt.apputs.utils.JSONParser;
 import com.squareup.picasso.Picasso;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.setditjenp2mkt.apputs.R.id.editdeskripsi;
@@ -40,13 +45,19 @@ public class EditActivity extends AppCompatActivity {
     private FloatingActionButton cancel;
     String id_kota;
     JSONArray jsonArray = null;
+    JSONParser jsonParser;
     ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
         id_kota = getIntent().getStringExtra(Global.ID);
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+
         editDeskripsi = (EditText)findViewById(R.id.editdeskripsi);
         juduldeskripsi = (TextView)findViewById(R.id.inputdeskripsi);
         editKota = (EditText)findViewById(editnamakota);
@@ -85,13 +96,65 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
+//    private class detailKota extends AsyncTask<String,String,String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            List<NameValuePair> detailKota = new ArrayList<>();
+//            detailKota.add(new BasicNameValuePair("id_kota",id_kota));
+//            JSONObject jsonObject = jsonParser.makeHttpRequest(Global.DETAIL_KOTA, "GET", detailKota);
+//            try {
+//                jsonArray = jsonObject.getJSONArray("kota");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            Log.i("Data Json : ", "" + jsonObject);
+//
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    ImageView img = (ImageView)findViewById(R.id.imageKota);
+//                    TextView jdl = (TextView)findViewById(R.id.namakota);
+//                    TextView konten = (TextView)findViewById(R.id.kontendeskripsi);
+//                    try{
+//                        JSONObject js = jsonArray.getJSONObject(0);
+//                        String judul = js.getString("kota");
+//                        String isi = js.getString("deskripsi");
+//                        //set data
+//                        editKota.setText(judul);
+//                        editDeskripsi.setText(isi);
+//                    }catch (JSONException e){
+//                    }
+//                }
+//            });
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            pDialog = new ProgressDialog(EditActivity.this);
+//            pDialog.setTitle("Harap Tunggu");
+//            pDialog.setMessage("Sedang mengambil data");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            pDialog.dismiss();
+//        }
+//    }
+
+
     private void LoadDataKota(final String id_kota){
         String tag_string_req = "req_load_kota";
 
         pDialog.setMessage("Memuat ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DETAIL_KOTA, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, Global.DETAIL_KOTA+"?id_kota="+id_kota, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Data Response: " + response.toString());
@@ -103,14 +166,12 @@ public class EditActivity extends AppCompatActivity {
                     Log.i("Data Json : ", "" + jObj);
 
                     JSONObject js = jsonArray.getJSONObject(0);
-                    String judul = js.getString("nama_tempat");
+                    String judul = js.getString("kota");
                     String isi = js.getString("deskripsi");
-                    String gbr = Global.GET_IMAGE_WISATA+ js.getString("gambar");
 
                     //set data
                     editKota.setText(judul);
                     editDeskripsi.setText(isi);
-//                    Picasso.with(EditActivity.this).load(gbr).into(img);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -128,7 +189,10 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting parameters to login url
+                /*
+                   Caution:
+                   This part is not used since the method request created in API was GET
+                */
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_kota", id_kota);
                 return params;
