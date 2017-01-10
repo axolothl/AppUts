@@ -147,7 +147,6 @@ public class AddActivity extends AppCompatActivity {
         };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-
     }
 
 //    public String getStringImage(Bitmap bmp){

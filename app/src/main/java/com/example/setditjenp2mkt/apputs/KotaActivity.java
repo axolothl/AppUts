@@ -328,16 +328,19 @@ public class KotaActivity extends AppCompatActivity {
                 Intent intent = new Intent(KotaActivity.this, EditActivity.class);
                 intent.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 startActivity(intent);
+                finish();
                 return true;
             case R.id.edit_wisata:
                 Intent intent1 = new Intent(KotaActivity.this, EditActivity.class);
                 intent1.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 startActivity(intent1);
+                finish();
                 return true;
             case R.id.edit_kuliner:
                 Intent intent2 = new Intent(KotaActivity.this, EditActivity.class);
                 intent2.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 startActivity(intent2);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

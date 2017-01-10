@@ -71,13 +71,17 @@ public class EditActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditActivity.this, KotaActivity.class);
                 String namakota = editKota.getText().toString();
                 String deskripsi = editDeskripsi.getText().toString();
-                String gambar = "";
-                EditKota(id_kota,deskripsi,gambar,namakota);
+                EditKota(id_kota,deskripsi,namakota);
+                Intent intent = new Intent(EditActivity.this, KotaActivity.class);
+                intent.putExtra(Global.ID, id_kota);
                 startActivity(intent);
                 finish();
+                overridePendingTransition( 0, 0);
+                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
+                Toast.makeText(getApplicationContext(), "Kota Berhasil Disunting", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -92,60 +96,55 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
-    private void EditKota(final String id_kota, final String deskripsi, final String gambar, final String nama_kota){
+    private void EditKota(final String id_kota, final String deskripsi, final String nama_kota){
+        String tag_string_req = "req_edit_kota";
+        pDialog.setMessage("Mengubah Data ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.EDIT_DATA_KOTA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Input Kota Response: " + response.toString());
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        hideDialog();
+                        Toast.makeText(getApplicationContext(), "Data Kota Berhasil Diubah", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Edit Kota Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                params.put("nama_kota", nama_kota);
+                params.put("deskripsi", deskripsi);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 
     }
-
-//    private class detailKota extends AsyncTask<String,String,String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            List<NameValuePair> detailKota = new ArrayList<>();
-//            detailKota.add(new BasicNameValuePair("id_kota",id_kota));
-//            JSONObject jsonObject = jsonParser.makeHttpRequest(Global.DETAIL_KOTA, "GET", detailKota);
-//            try {
-//                jsonArray = jsonObject.getJSONArray("kota");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            Log.i("Data Json : ", "" + jsonObject);
-//
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    ImageView img = (ImageView)findViewById(R.id.imageKota);
-//                    TextView jdl = (TextView)findViewById(R.id.namakota);
-//                    TextView konten = (TextView)findViewById(R.id.kontendeskripsi);
-//                    try{
-//                        JSONObject js = jsonArray.getJSONObject(0);
-//                        String judul = js.getString("kota");
-//                        String isi = js.getString("deskripsi");
-//                        //set data
-//                        editKota.setText(judul);
-//                        editDeskripsi.setText(isi);
-//                    }catch (JSONException e){
-//                    }
-//                }
-//            });
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            pDialog = new ProgressDialog(EditActivity.this);
-//            pDialog.setTitle("Harap Tunggu");
-//            pDialog.setMessage("Sedang mengambil data");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(false);
-//            pDialog.show();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            pDialog.dismiss();
-//        }
-//    }
 
 
     private void LoadDataKota(final String id_kota){
@@ -191,7 +190,7 @@ public class EditActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 /*
                    Caution:
-                   This part is not used since the method request created in API was GET
+                   This part is not used since the method request created in PANTURA API was GET
                 */
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_kota", id_kota);
