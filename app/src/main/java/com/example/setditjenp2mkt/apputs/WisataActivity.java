@@ -44,7 +44,7 @@ import java.util.Map;
 
 public class WisataActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    String id, id_wisata;
+    String id, id_wisata, nama_tempat;
     private static final String TAG = WisataActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     Double lati, longi;
@@ -73,6 +73,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         id_wisata = getIntent().getStringExtra(Global.ID_WISATA);
         lati = Double.parseDouble(getIntent().getStringExtra(Global.LATI));
         longi = Double.parseDouble(getIntent().getStringExtra(Global.LONGI));
+        nama_tempat = getIntent().getStringExtra(Global.NAMA_TEMPAT);
         DaftarKomen = new ArrayList<HashMap<String, String>>();
 
         detailWisata(id,id_wisata);
@@ -321,6 +322,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
                     String judul = js.getString("nama_tempat");
                     String isi = js.getString("deskripsi");
                     String gbr = Global.GET_IMAGE_WISATA+ js.getString("gambar");
+
                     //set data
                     jdl.setText(judul);
                     konten.setText(isi);
@@ -363,8 +365,9 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         LatLng currentPos = new LatLng(lati,longi);
         CameraPosition target = CameraPosition.builder().target(currentPos).zoom(14).build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-//        googleMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(lati,longi)));
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(lati, longi))
+                .title(nama_tempat));
     }
 
     private void showDialog() {

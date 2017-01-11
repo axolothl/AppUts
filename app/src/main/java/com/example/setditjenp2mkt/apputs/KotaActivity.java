@@ -96,6 +96,7 @@ public class KotaActivity extends AppCompatActivity {
                 a.putExtra(Global.ID_WISATA, map_wisata.get(Global.ID_WISATA));
                 a.putExtra(Global.LONGI, map_wisata.get(Global.LONGI));
                 a.putExtra(Global.LATI, map_wisata.get(Global.LATI));
+                a.putExtra(Global.NAMA_TEMPAT, map_wisata.get(Global.NAMA_TEMPAT));
                 startActivity(a);
                 finish();
             }
@@ -116,6 +117,7 @@ public class KotaActivity extends AppCompatActivity {
                 a.putExtra(Global.ID_KULINER, map_kuliner.get(Global.ID_KULINER));
                 a.putExtra(Global.LONGI, map_kuliner.get(Global.LONGI));
                 a.putExtra(Global.LATI, map_kuliner.get(Global.LATI));
+                a.putExtra(Global.NAMA_TEMPAT, map_kuliner.get(Global.NAMA_TEMPAT));
                 startActivity(a);
                 finish();
             }

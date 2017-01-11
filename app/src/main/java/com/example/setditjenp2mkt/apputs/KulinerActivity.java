@@ -48,7 +48,7 @@ import java.util.Map;
 
 public class KulinerActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    String id, id_kuliner;
+    String id, id_kuliner, nama_tempat;
     Double lati, longi;
     private static final String TAG = KulinerActivity.class.getSimpleName();
     private ProgressDialog progressDialog;
@@ -78,6 +78,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         id_kuliner = getIntent().getStringExtra(Global.ID_KULINER);
         lati = Double.parseDouble(getIntent().getStringExtra(Global.LATI));
         longi = Double.parseDouble(getIntent().getStringExtra(Global.LONGI));
+        nama_tempat = getIntent().getStringExtra(Global.NAMA_TEMPAT);
         DaftarKomen = new ArrayList<HashMap<String, String>>();
 
         detailKuliner(id,id_kuliner);
@@ -370,8 +371,9 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         LatLng currentPos = new LatLng(lati,longi);
         CameraPosition target = CameraPosition.builder().target(currentPos).zoom(14).build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-//        googleMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(lati,longi)));
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(lati, longi))
+                .title(nama_tempat));
     }
 
     private void showDialog() {
