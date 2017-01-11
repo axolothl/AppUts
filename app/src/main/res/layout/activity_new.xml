@@ -33,7 +33,7 @@
         android:layout_alignBottom="@+id/namaTempat"
         android:layout_toRightOf="@+id/namaTempat"
         android:layout_toEndOf="@+id/namaTempat"
-        android:hint="Nama Kota"
+        android:hint="Nama Tempat"
         android:layout_width="300dp" />
 
     <TextView
@@ -58,7 +58,7 @@
         android:layout_alignBottom="@+id/mapLatitude"
         android:layout_toRightOf="@+id/mapLatitude"
         android:layout_toEndOf="@+id/mapLatitude"
-        android:hint="coordinate"
+        android:hint="Coordinate"
         android:layout_width="300dp" />
 
     <TextView

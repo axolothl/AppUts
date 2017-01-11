@@ -138,6 +138,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         startActivity(getIntent());
         overridePendingTransition( 0, 0);
         Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void deleteKomentar(final String id_kota, final String id_wisata, final String id_user, final String id_feedback_tw){

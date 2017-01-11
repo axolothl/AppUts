@@ -88,7 +88,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         komentar = (ListView)findViewById(R.id.komen);
         komentar.setItemsCanFocus(true);
 
-        emptyTV = (TextView)findViewById(R.id.emptytext);
+        emptyTV = (TextView)findViewById(R.id.emptytext1);
 
         db = new SQLiteHandler(getApplicationContext());
 
@@ -118,7 +118,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                 overridePendingTransition( 0, 0);
                 komen_check = true;
                 komen.setText("");
-
+                finish();
             }
         });
     }
@@ -142,6 +142,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         startActivity(getIntent());
         overridePendingTransition( 0, 0);
         Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void deleteKomentar(final String id_kota, final String id_kuliner, final String id_user, final String id_feedback_tk){
@@ -215,7 +216,7 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                         String nama = c.getString("name");
                         String id_feedback_tk = c.getString("id_feedback_tk");
                         HashMap<String,String> map_komen = new HashMap<>();
-                        map_komen.put(Global.ID_WISATA,id_kuliner);
+                        map_komen.put(Global.ID_KULINER,id_kuliner);
                         map_komen.put(Global.ID_KOTA,id_kota);
                         map_komen.put(Global.FEEDBACK,feedback);
                         map_komen.put(Global.ID_USER,id_user);
@@ -331,14 +332,11 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
                     konten.setText(isi);
 //                    imageLoader.DisplayImage(gbr, img);
                     Picasso.with(KulinerActivity.this).load(gbr).into(img);
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
+                loadKomentar(id_kota,id_kuliner);
             }
         }, new Response.ErrorListener() {
             @Override

@@ -96,6 +96,7 @@ public class NewActivity extends AppCompatActivity {
                 } else if(s_add_code.equals("kuliner")){
                     Toast.makeText(getApplicationContext(), "Tempat Kuliner Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
                 }
+                finish();
             }
         });
 
@@ -113,7 +114,7 @@ public class NewActivity extends AppCompatActivity {
 
     private void submitTempat(final String add_code, final String id_kota, final String nama_tempat, final String deskripsi, final String map_latitude, final String map_longitude, final String nama_gambar, final String gambar){
         if(add_code.equals("wisata")){
-            url = Global.SUBMIT_KOMENTAR_WISATA;
+            url = Global.INPUT_DATA_WISATA;
             String tag_string_req = "req_submit_wisata";
             pDialog.setMessage("Memasukkan Data ...");
             showDialog();
@@ -167,7 +168,7 @@ public class NewActivity extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 
         } else if(add_code.equals("kuliner")){
-            url = Global.SUBMIT_KOMENTAR_KULINER;
+            url = Global.INPUT_DATA_KULINER;
             String tag_string_req = "req_submit_kuliner";
             pDialog.setMessage("Memasukkan Data ...");
             showDialog();

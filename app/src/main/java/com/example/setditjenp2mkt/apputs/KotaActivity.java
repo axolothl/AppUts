@@ -97,6 +97,7 @@ public class KotaActivity extends AppCompatActivity {
                 a.putExtra(Global.LONGI, map_wisata.get(Global.LONGI));
                 a.putExtra(Global.LATI, map_wisata.get(Global.LATI));
                 startActivity(a);
+                finish();
             }
         });
 
@@ -116,6 +117,7 @@ public class KotaActivity extends AppCompatActivity {
                 a.putExtra(Global.LONGI, map_kuliner.get(Global.LONGI));
                 a.putExtra(Global.LATI, map_kuliner.get(Global.LATI));
                 startActivity(a);
+                finish();
             }
         });
 
@@ -179,7 +181,7 @@ public class KotaActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBarW.setVisibility(View.VISIBLE);
+            progressBarK.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -220,7 +222,7 @@ public class KotaActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     SetListWisata(DaftarWisata);
-                    progressBarW.setVisibility(View.GONE);
+                    progressBarK.setVisibility(View.GONE);
                 }
             });
         }
