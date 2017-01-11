@@ -71,6 +71,7 @@ public class CommentAdapter extends BaseAdapter {
         db = new SQLiteHandler(CommentAdapter.inflater.getContext());
         HashMap<String, String> user = db.getUserDetails();
         final String id_user_sqlite = user.get("id_user");
+        final String email = user.get("email");
 
         final String id_user = daftar_comment.get(Global.ID_USER);
 
@@ -86,7 +87,12 @@ public class CommentAdapter extends BaseAdapter {
         }
 
         txtTitle.setText(daftar_comment.get(Global.NAMA));
-        Picasso.with(CommentAdapter.inflater.getContext()).load(R.drawable.user).into(imageView);
+        if(id_user.equals(id_user_sqlite) && email.equals("admin")){
+            Picasso.with(CommentAdapter.inflater.getContext()).load(R.mipmap.logo).into(imageView);
+        } else {
+            Picasso.with(CommentAdapter.inflater.getContext()).load(R.drawable.user).into(imageView);
+        }
+
         extratxt.setText(daftar_comment.get(Global.FEEDBACK));
         return rowView;
     }
