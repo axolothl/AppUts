@@ -37,6 +37,10 @@ public class Global {
     public static final String INPUT_DATA_WISATA = BASE_URL+"Welcome/submit_data_wisata";
     public static final String INPUT_DATA_KULINER = BASE_URL+"Welcome/submit_data_kuliner";
 
+    public static final String DELETE_DATA_KOTA = BASE_URL+"Welcome/delete_data_kota";
+    public static final String DELETE_DATA_WISATA = BASE_URL+"Welcome/delete_data_wisata";
+    public static final String DELETE_DATA_KULINER = BASE_URL+"Welcome/delete_data_kuliner";
+
     //global variable
     public static final String ID = "id";
     public static final String KOTA = "kota";
@@ -56,5 +60,6 @@ public class Global {
     public static final String ID_FEEDBACK_TW = "id_feedback_tw";
     public static final String ID_FEEDBACK_TK = "id_feedback_tk";
     public static final String ADD_CODE = "code";
+    public static final String JENIS = "jenis";
 }
 

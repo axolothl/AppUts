@@ -26,6 +26,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.setditjenp2mkt.apputs.adapter.CommentAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.KulinerAdapter;
 import com.example.setditjenp2mkt.apputs.adapter.ListAdapter;
@@ -45,6 +49,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class KotaActivity extends AppCompatActivity {
     String id, add_code;
@@ -60,6 +65,8 @@ public class KotaActivity extends AppCompatActivity {
 
     TextView empty_wisata, empty_kuliner;
     ListView wisata, makanan;
+
+    private static final String TAG = KotaActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +90,8 @@ public class KotaActivity extends AppCompatActivity {
 
         new tampilWisata().execute();
 
-
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setCancelable(false);
 
         wisata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -167,6 +175,7 @@ public class KotaActivity extends AppCompatActivity {
             progressDialog = new ProgressDialog(KotaActivity.this);
             progressDialog.setTitle("Harap Tunggu");
             progressDialog.setMessage("Sedang mengambil data");
+//            showDialog();
             progressDialog.setIndeterminate(false);
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -175,6 +184,7 @@ public class KotaActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
+//            hideDialog();
         }
     }
 
@@ -282,6 +292,54 @@ public class KotaActivity extends AppCompatActivity {
         }
     }
 
+    private void deleteKota(final String id_kota){
+        String tag_string_req = "req_delete_kota";
+        progressDialog.setMessage("Deleting Kota ...");
+//        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DELETE_DATA_KOTA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Kota Delete Response: " + response.toString());
+//                hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(), "Kota berhasil dihapus", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                loadKomentar(id_kota,id_wisata);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Kota Delete Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+//                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
     private void SetListWisata(ArrayList<HashMap<String, String>> daftarWisata) {
         if(daftarWisata.size() == 0) {
             wisataAdapter = new WisataAdapter(this, new ArrayList<HashMap<String, String>>());
@@ -304,6 +362,18 @@ public class KotaActivity extends AppCompatActivity {
             kulinerAdapter.notifyDataSetChanged();
         }
         makanan.setAdapter(kulinerAdapter);
+    }
+
+    private void showDialog() {
+        progressDialog = new ProgressDialog(KotaActivity.this);
+        if (!progressDialog.isShowing())
+            progressDialog.show();
+    }
+
+    private void hideDialog() {
+        progressDialog = new ProgressDialog(KotaActivity.this);
+        if (progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 
     @Override
@@ -346,6 +416,13 @@ public class KotaActivity extends AppCompatActivity {
                 k.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
                 k.putExtra(Global.ADD_CODE, "kuliner");
                 startActivity(k);
+                finish();
+                return true;
+            case R.id.delete:
+                deleteKota(id);
+                Intent del = new Intent(KotaActivity.this, MainActivity.class);
+                del.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(del);
                 finish();
                 return true;
             default:

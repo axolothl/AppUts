@@ -78,13 +78,10 @@ public class AddActivity extends AppCompatActivity {
                 String nama_gambar = imageName.getText().toString();
                 tambahKota(namakota,deskripsi,gambar, nama_gambar);
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                overridePendingTransition(0,0);
                 startActivity(intent);
                 finish();
-                overridePendingTransition( 0, 0);
-                startActivity(getIntent());
-                overridePendingTransition( 0, 0);
                 Toast.makeText(getApplicationContext(), "Kota Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
-
             }
         });
 

@@ -84,26 +84,18 @@ public class NewActivity extends AppCompatActivity {
                 String gambar = getStringImage(bitmap);
                 String nama_gambar = imageName.getText().toString();
                 submitTempat(s_add_code,id,nama_tempat,deskripsi,lati,longi,nama_gambar,gambar);
-                Intent intent = new Intent(NewActivity.this, KotaActivity.class);
-                intent.putExtra(Global.ID,id);
-                startActivity(intent);
-                finish();
-                overridePendingTransition( 0, 0);
-                startActivity(getIntent());
-                overridePendingTransition( 0, 0);
                 if(s_add_code.equals("wisata")){
                     Toast.makeText(getApplicationContext(), "Tempat Wisata Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
                 } else if(s_add_code.equals("kuliner")){
                     Toast.makeText(getApplicationContext(), "Tempat Kuliner Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
                 }
-                finish();
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewActivity.this, AddActivity.class);
+                Intent intent = new Intent(NewActivity.this, KotaActivity.class);
                 intent.putExtra(Global.ID,id);
                 startActivity(intent);
                 finish();
@@ -130,6 +122,11 @@ public class NewActivity extends AppCompatActivity {
                         if (!error) {
                             hideDialog();
                             Toast.makeText(getApplicationContext(), "Data Wisata Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewActivity.this, KotaActivity.class);
+                            intent.putExtra(Global.ID,id);
+                            overridePendingTransition(0,0);
+                            startActivity(intent);
+                            finish();
                         } else {
                             String errorMsg = jsonObject.getString("error_msg");
                             Toast.makeText(getApplicationContext(),
@@ -184,6 +181,12 @@ public class NewActivity extends AppCompatActivity {
                         if (!error) {
                             hideDialog();
                             Toast.makeText(getApplicationContext(), "Data Kuliner Berhasil Ditambahkan", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewActivity.this, KotaActivity.class);
+                            intent.putExtra(Global.ID,id);
+                            overridePendingTransition(0,0);
+                            startActivity(intent);
+                            finish();
+
                         } else {
                             String errorMsg = jsonObject.getString("error_msg");
                             Toast.makeText(getApplicationContext(),

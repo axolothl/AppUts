@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -141,6 +144,55 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         overridePendingTransition( 0, 0);
         Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    private void deleteWisata(final String id_kota, final String id_wisata){
+        String tag_string_req = "req_delete_wisata";
+        pDialog.setMessage("Deleting Wisata ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DELETE_DATA_WISATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Wisata Delete Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(), "Wisata berhasil dihapus", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                loadKomentar(id_kota,id_wisata);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Wisata Delete Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                params.put("id_wisata", id_wisata);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void deleteKomentar(final String id_kota, final String id_wisata, final String id_user, final String id_feedback_tw){
@@ -355,7 +407,6 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
             }
 
         };
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
@@ -404,5 +455,44 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         finish();
         return;
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        db = new SQLiteHandler(WisataActivity.this);
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("email");
+        if (id_user_sqlite.matches("admin")){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_tempat, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.edit_deskripsi:
+                Intent intent = new Intent(WisataActivity.this, TempatActivity.class);
+                intent.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                intent.putExtra(Global.ID_WISATA, getIntent().getStringExtra(Global.ID_WISATA));
+                intent.putExtra(Global.JENIS, "wisata");
+                intent.putExtra(Global.LATI, lati.toString());
+                intent.putExtra(Global.LONGI, longi.toString());
+                intent.putExtra(Global.NAMA_TEMPAT, nama_tempat);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.delete:
+                deleteWisata(id,id_wisata);
+                Intent del = new Intent(WisataActivity.this, KotaActivity.class);
+                del.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(del);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
 }

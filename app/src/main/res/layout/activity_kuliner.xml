@@ -54,6 +54,11 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:id="@+id/textView2" />
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map_kuliner"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
             <TextView
                 android:text="Komentar"
                 android:layout_width="match_parent"
@@ -103,12 +108,6 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/submit" />
-
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/map_kuliner"
-                android:name="com.google.android.gms.maps.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
 
         </LinearLayout>
     </ScrollView>

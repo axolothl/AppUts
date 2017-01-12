@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_tempat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.setditjenp2mkt.apputs.TempatActivity">
+
+    <TextView
+        android:text="Nama Tempat :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:id="@+id/namaTempat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:id="@+id/inputNamaTempat"
+        android:layout_alignBaseline="@+id/namaTempat"
+        android:layout_alignBottom="@+id/namaTempat"
+        android:layout_toRightOf="@+id/namaTempat"
+        android:layout_toEndOf="@+id/namaTempat"
+        android:hint="Nama Tempat"
+        android:layout_width="300dp" />
+
+    <TextView
+        android:text="Latitude :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/namaTempat"
+        android:id="@+id/mapLatitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:id="@+id/inputMapLatitude"
+        android:layout_alignBaseline="@+id/mapLatitude"
+        android:layout_alignBottom="@+id/mapLatitude"
+        android:layout_toRightOf="@+id/mapLatitude"
+        android:layout_toEndOf="@+id/mapLatitude"
+        android:hint="Coordinate"
+        android:layout_width="300dp" />
+
+    <TextView
+        android:text="Longitude :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:id="@+id/mapLongitude"
+        android:layout_below="@+id/mapLatitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:id="@+id/inputMapLongitude"
+        android:layout_alignBaseline="@+id/mapLongitude"
+        android:layout_alignBottom="@+id/mapLongitude"
+        android:layout_toRightOf="@+id/mapLongitude"
+        android:layout_toEndOf="@+id/mapLongitude"
+        android:hint="Coordinate"
+        android:layout_width="300dp" />
+
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:id="@+id/editdeskripsi"
+        android:layout_alignBaseline="@+id/inputdeskripsi"
+        android:layout_alignBottom="@+id/inputdeskripsi"
+        android:layout_toRightOf="@+id/inputdeskripsi"
+        android:layout_toEndOf="@+id/inputdeskripsi"
+        android:hint="Deskripsi"
+        android:layout_width="300dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_clear_black_24dp"
+        android:id="@+id/cancel"
+        android:layout_alignTop="@+id/ok"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_check_black_24dp"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/ok"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/cancel"
+        android:layout_toStartOf="@+id/cancel"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <TextView
+        android:text="Deskripsi :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/inputdeskripsi"
+        android:layout_below="@+id/mapLongitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

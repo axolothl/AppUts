@@ -76,12 +76,13 @@ public class EditActivity extends AppCompatActivity {
                 EditKota(id_kota,deskripsi,namakota);
                 Intent intent = new Intent(EditActivity.this, KotaActivity.class);
                 intent.putExtra(Global.ID, id_kota);
+                overridePendingTransition( 0, 0);
+//                startActivity(getIntent());
+                overridePendingTransition( 0, 0);
                 startActivity(intent);
                 finish();
-                overridePendingTransition( 0, 0);
-                startActivity(getIntent());
-                overridePendingTransition( 0, 0);
                 Toast.makeText(getApplicationContext(), "Kota Berhasil Disunting", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
@@ -89,6 +90,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditActivity.this, KotaActivity.class);
+                intent.putExtra(Global.ID, id_kota);
                 startActivity(intent);
                 finish();
             }
@@ -212,4 +214,14 @@ public class EditActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EditActivity.this, KotaActivity.class);
+        intent.putExtra(Global.ID, id_kota);
+        startActivity(intent);
+        finish();
+        return;
+    }
+
 }

@@ -11,5 +11,7 @@
     <item android:title="Tambah Kuliner"
         android:id="@+id/edit_kuliner"
         app:showAsAction="never" />
-
+    <item android:title="Delete"
+        android:id="@+id/delete"
+        app:showAsAction="never" />
 </menu>

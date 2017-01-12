@@ -6,6 +6,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -146,6 +149,56 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
         finish();
     }
+
+    private void deleteKuliner(final String id_kota, final String id_kuliner){
+        String tag_string_req = "req_delete_kuliner";
+        progressDialog.setMessage("Deleting Kuliner ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, Global.DELETE_DATA_KULINER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Kuliner Delete Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(), "Kuliner berhasil dihapus", Toast.LENGTH_LONG).show();
+                    } else {
+                        String errorMsg = jsonObject.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                loadKomentar(id_kota,id_wisata);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Kuliner Delete Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_kota", id_kota);
+                params.put("id_kuliner", id_kuliner);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
 
     private void deleteKomentar(final String id_kota, final String id_kuliner, final String id_user, final String id_feedback_tk){
         String tag_string_req = "req_delete_komentar";
@@ -410,4 +463,41 @@ public class KulinerActivity extends AppCompatActivity implements OnMapReadyCall
         finish();
         return;
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        db = new SQLiteHandler(KulinerActivity.this);
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("email");
+        if (id_user_sqlite.matches("admin")){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_tempat, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.edit_deskripsi:
+                Intent intent = new Intent(KulinerActivity.this, TempatActivity.class);
+                intent.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                intent.putExtra(Global.ID_KULINER, getIntent().getStringExtra(Global.ID_KULINER));
+                intent.putExtra(Global.JENIS, "kuliner");
+                intent.putExtra(Global.LATI, lati.toString());
+                intent.putExtra(Global.LONGI, longi.toString());
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.delete:
+                deleteKuliner(id,id_kuliner);
+                Intent del = new Intent(KulinerActivity.this, KotaActivity.class);
+                del.putExtra(Global.ID, getIntent().getStringExtra(Global.ID));
+                startActivity(del);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
