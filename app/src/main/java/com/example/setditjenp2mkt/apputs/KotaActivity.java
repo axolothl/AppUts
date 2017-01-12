@@ -38,6 +38,7 @@ import com.example.setditjenp2mkt.apputs.helpers.SQLiteHandler;
 import com.example.setditjenp2mkt.apputs.utils.Global;
 import com.example.setditjenp2mkt.apputs.utils.ImageLoader;
 import com.example.setditjenp2mkt.apputs.utils.JSONParser;
+import com.example.setditjenp2mkt.apputs.utils.UIUtils;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.NameValuePair;
@@ -347,6 +348,7 @@ public class KotaActivity extends AppCompatActivity {
             wisataAdapter.notifyDataSetInvalidated();
         } else {
             wisataAdapter = new WisataAdapter(this, daftarWisata);
+//            UIUtils.setListViewHeightBasedOnItems(wisata);
             wisataAdapter.notifyDataSetChanged();
         }
         wisata.setAdapter(wisataAdapter);
@@ -359,6 +361,7 @@ public class KotaActivity extends AppCompatActivity {
             kulinerAdapter.notifyDataSetInvalidated();
         } else {
             kulinerAdapter = new KulinerAdapter(this, daftarKuliner);
+//            UIUtils.setListViewHeightBasedOnItems(makanan);
             kulinerAdapter.notifyDataSetChanged();
         }
         makanan.setAdapter(kulinerAdapter);

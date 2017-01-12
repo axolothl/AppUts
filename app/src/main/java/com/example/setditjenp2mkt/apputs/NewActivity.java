@@ -186,7 +186,7 @@ public class NewActivity extends AppCompatActivity {
                             overridePendingTransition(0,0);
                             startActivity(intent);
                             finish();
-
+                            System.gc();
                         } else {
                             String errorMsg = jsonObject.getString("error_msg");
                             Toast.makeText(getApplicationContext(),
