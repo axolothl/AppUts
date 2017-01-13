@@ -127,6 +127,7 @@ public class NewActivity extends AppCompatActivity {
                             overridePendingTransition(0,0);
                             startActivity(intent);
                             finish();
+                            System.gc();
                         } else {
                             String errorMsg = jsonObject.getString("error_msg");
                             Toast.makeText(getApplicationContext(),
@@ -154,7 +155,6 @@ public class NewActivity extends AppCompatActivity {
                     params.put("nama_tempat", nama_tempat);
                     params.put("lati", map_latitude);
                     params.put("longi", map_longitude);
-                    params.put("nama_tempat", nama_tempat);
                     params.put("deskripsi", deskripsi);
                     params.put("gambar", gambar);
                     params.put("nama_gambar", nama_gambar);
@@ -214,7 +214,6 @@ public class NewActivity extends AppCompatActivity {
                     params.put("nama_tempat", nama_tempat);
                     params.put("lati", map_latitude);
                     params.put("longi", map_longitude);
-                    params.put("nama_tempat", nama_tempat);
                     params.put("deskripsi", deskripsi);
                     params.put("gambar", gambar);
                     params.put("nama_gambar", nama_gambar);

@@ -132,18 +132,7 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
         String id_user = map.get(Global.ID_USER);
         String id_wisata = map.get(Global.ID_WISATA);
         deleteKomentar(id_kota,id_wisata,id_user,id_feedback_tw);
-        Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
-        reOpen.putExtra(Global.ID, id);
-        reOpen.putExtra(Global.ID_WISATA, id_wisata);
-        reOpen.putExtra(Global.LONGI, String.valueOf(longi));
-        reOpen.putExtra(Global.LATI, String.valueOf(lati));
-        startActivity(reOpen);
-        finish();
-        overridePendingTransition( 0, 0);
-        startActivity(getIntent());
-        overridePendingTransition( 0, 0);
         Toast.makeText(getApplicationContext(), "Komentar telah dihapus", Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     private void deleteWisata(final String id_kota, final String id_wisata){
@@ -155,12 +144,21 @@ public class WisataActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Wisata Delete Response: " + response.toString());
-                hideDialog();
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean error = jsonObject.getBoolean("error");
                     if (!error) {
+                        hideDialog();
+                        Intent reOpen = new Intent (WisataActivity.this, WisataActivity.class);
+                        reOpen.putExtra(Global.ID, id);
+                        reOpen.putExtra(Global.ID_WISATA, id_wisata);
+                        reOpen.putExtra(Global.LONGI, String.valueOf(longi));
+                        reOpen.putExtra(Global.LATI, String.valueOf(lati));
+                        overridePendingTransition( 0, 0);
+                        startActivity(reOpen);
+                        finish();
+                        System.gc();
                         Toast.makeText(getApplicationContext(), "Wisata berhasil dihapus", Toast.LENGTH_LONG).show();
                     } else {
                         String errorMsg = jsonObject.getString("error_msg");
