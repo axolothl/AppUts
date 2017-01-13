@@ -55,13 +55,20 @@ public class LoginActivity extends Activity {
         // Session manager
         session = new SessionManager(getApplicationContext());
 
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+        HashMap<String, String> user = db.getUserDetails();
+        final String id_user_sqlite = user.get("email");
+        if(id_user_sqlite!=null){
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
             finish();
         }
+        // Check if user is already logged in or not
+//        if (session.isLoggedIn()) {
+//            // User is already logged in. Take him to main activity
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {

@@ -192,14 +192,18 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         db = new SQLiteHandler(MainActivity.this);
+        session = new SessionManager(MainActivity.this);
         HashMap<String, String> user = db.getUserDetails();
         final String id_user_sqlite = user.get("email");
-        if (id_user_sqlite.matches("admin")){
+
+        if (id_user_sqlite.matches("admin")) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_utama_admin, menu);
+//                return super.onCreateOptionsMenu(menu);
         } else {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_utama, menu);
+//                return super.onCreateOptionsMenu(menu);
         }
         return super.onCreateOptionsMenu(menu);
     }

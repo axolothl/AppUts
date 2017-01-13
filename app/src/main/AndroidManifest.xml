@@ -34,15 +34,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity android:name=".KotaActivity" />
         <activity android:name=".WisataActivity" />
         <activity android:name=".KulinerActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
