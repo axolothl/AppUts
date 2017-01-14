@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.setditjenp2mkt.apputs"
+    package="com.pantura.setditjenp2mkt.apputs"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +14,7 @@
         android:required="true" />
 
     <application
-        android:name=".AppController"
+        android:name="com.pantura.setditjenp2mkt.apputs.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="Pantura"
@@ -25,7 +25,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".SplashScreen"
+            android:name="com.pantura.setditjenp2mkt.apputs.SplashScreen"
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,13 +33,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.MainActivity">
         </activity>
-        <activity android:name=".KotaActivity" />
-        <activity android:name=".WisataActivity" />
-        <activity android:name=".KulinerActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.KotaActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.WisataActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.KulinerActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.RegisterActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -49,10 +49,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".AddActivity" />
-        <activity android:name=".EditActivity" />
-        <activity android:name=".NewActivity" />
-        <activity android:name=".TempatActivity"></activity>
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.AddActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.EditActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.NewActivity" />
+        <activity android:name="com.pantura.setditjenp2mkt.apputs.TempatActivity"></activity>
     </application>
 
 </manifest>

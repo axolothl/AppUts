@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgac"
-    tools:context="com.example.setditjenp2mkt.apputs.MainActivity">
+    tools:context="com.pantura.setditjenp2mkt.apputs.MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
