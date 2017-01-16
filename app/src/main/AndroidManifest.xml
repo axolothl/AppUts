@@ -34,15 +34,15 @@
             </intent-filter>
         </activity>
         <activity android:name="com.pantura.setditjenp2mkt.apputs.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity android:name="com.pantura.setditjenp2mkt.apputs.KotaActivity" />
         <activity android:name="com.pantura.setditjenp2mkt.apputs.WisataActivity" />
         <activity android:name="com.pantura.setditjenp2mkt.apputs.KulinerActivity" />
         <activity android:name="com.pantura.setditjenp2mkt.apputs.RegisterActivity" />
         <activity android:name="com.pantura.setditjenp2mkt.apputs.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
 
         <meta-data

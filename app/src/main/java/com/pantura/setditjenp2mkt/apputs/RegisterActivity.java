@@ -122,23 +122,21 @@ public class RegisterActivity extends Activity {
                     if (!error) {
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
-
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
-                        String id_user = user.getString("id_user");
+//                        String uid = jObj.getString("uid");
+//
+//                        JSONObject user = jObj.getJSONObject("user");
+//                        String name = user.getString("name");
+//                        String email = user.getString("email");
+//                        String created_at = user
+//                                .getString("created_at");
+//                        String id_user = user.getString("id_user");
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at, id_user);
+//                        db.addUser(name, email, uid, created_at, id_user);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LoginActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
